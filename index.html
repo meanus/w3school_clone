@@ -3,1065 +3,1329 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CNN Tutorial - W3Schools</title>
-    <meta name="description" content="Learn about Convolutional Neural Networks (CNN) - W3Schools Tutorial">
+    <title>W3Schools - CNN Tutorial</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* Reset and Base Styles */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
+
+        :root {
+            --primary-green: #04AA6D;
+            --dark-bg: #282A35;
+            --darker-bg: #1e1e2e;
+            --sidebar-bg: #1a1a28;
+            --text-light: #ffffff;
+            --text-gray: #96999d;
+            --code-bg: #282A35;
+            --border-color: #404040;
+        }
+
         body {
-            font-family: 'Source Sans Pro', Arial, sans-serif;
-            background-color: #E7E9EB;
-            color: #000;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--darker-bg);
+            color: var(--text-light);
             line-height: 1.6;
         }
-        a {
-            text-decoration: none;
-            color: inherit;
-        }
-        /* Top Navigation */
-        .topnav {
-            background-color: #282A35;
-            height: 55px;
+
+        /* Header */
+        header {
+            background-color: var(--dark-bg);
+            padding: 12px 20px;
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 0 20px;
             position: sticky;
             top: 0;
             z-index: 1000;
+            border-bottom: 1px solid var(--border-color);
         }
-        .logo img {
-            height: 32px;
-        }
-        .nav-links {
-            display: flex;
-            gap: 0;
-        }
-        .nav-links a {
-            color: #fff;
-            padding: 16px 20px;
-            font-size: 15px;
-            transition: background-color 0.3s;
-        }
-        .nav-links a:hover {
-            background-color: rgba(255, 255, 255, 0.1);
-        }
-        .nav-right {
+
+        .logo {
             display: flex;
             align-items: center;
             gap: 10px;
         }
-        .search-btn, .theme-btn {
-            background: none;
-            border: none;
-            color: #fff;
+
+        .logo-icon {
+            width: 35px;
+            height: 35px;
+            background: linear-gradient(135deg, var(--primary-green), #02855a);
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
             font-size: 18px;
-            cursor: pointer;
-            padding: 8px;
+            color: white;
         }
-        .login-btn {
-            background-color: transparent;
-            border: none;
-            color: #fff;
-            padding: 8px 15px;
-            cursor: pointer;
+
+        .logo-text {
+            font-size: 16px;
+            color: var(--text-light);
+            font-weight: 500;
+        }
+
+        .header-nav {
+            display: flex;
+            gap: 25px;
+            align-items: center;
+        }
+
+        .nav-link {
+            color: var(--text-light);
+            text-decoration: none;
             font-size: 15px;
+            transition: color 0.3s;
         }
-        .signup-btn {
-            background-color: #04AA6D;
-            border: none;
-            color: #fff;
-            padding: 8px 20px;
+
+        .nav-link:hover {
+            color: var(--primary-green);
+        }
+
+        .search-box {
+            background-color: var(--darker-bg);
+            border: 1px solid var(--border-color);
             border-radius: 25px;
+            padding: 8px 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            width: 250px;
+        }
+
+        .search-box input {
+            background: transparent;
+            border: none;
+            outline: none;
+            color: var(--text-light);
+            width: 100%;
+            font-size: 14px;
+        }
+
+        .search-box input::placeholder {
+            color: var(--text-gray);
+        }
+
+        .header-icons {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .header-icons i {
+            font-size: 18px;
+            color: var(--text-light);
             cursor: pointer;
-            font-size: 15px;
-            font-weight: 600;
+            transition: color 0.3s;
         }
-        .signup-btn:hover {
-            background-color: #059862;
+
+        .header-icons i:hover {
+            color: var(--primary-green);
         }
-        /* Secondary Navigation */
-        .secondnav {
-            background-color: #282A35;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
+
+        /* Top Navigation Bar */
+        .top-nav {
+            background-color: var(--dark-bg);
+            padding: 12px 20px;
             overflow-x: auto;
             white-space: nowrap;
+            border-bottom: 1px solid var(--border-color);
         }
-        .secondnav-inner {
+
+        .top-nav-items {
             display: flex;
-            padding: 0 16px;
+            gap: 25px;
         }
-        .secondnav a {
-            color: #ddd;
-            padding: 10px 12px;
-            font-size: 13px;
+
+        .top-nav-item {
+            color: var(--text-gray);
+            text-decoration: none;
+            font-size: 14px;
+            text-transform: uppercase;
             letter-spacing: 0.5px;
+            transition: color 0.3s;
+            font-weight: 500;
         }
-        .secondnav a:hover {
-            color: #fff;
-            background-color: rgba(255, 255, 255, 0.1);
+
+        .top-nav-item:hover,
+        .top-nav-item.active {
+            color: var(--primary-green);
         }
-        .secondnav a.active {
-            color: #fff;
-            background-color: rgba(4, 170, 109, 0.3);
-        }
+
         /* Main Container */
-        .main-container {
+        .container {
             display: flex;
-            max-width: 1400px;
-            margin: 0 auto;
+            min-height: calc(100vh - 120px);
         }
-        /* Left Sidebar */
+
+        /* Sidebar */
         .sidebar {
             width: 220px;
-            background-color: #E7E9EB;
-            min-height: calc(100vh - 95px);
-            flex-shrink: 0;
-        }
-        .sidebar-inner {
+            background-color: var(--sidebar-bg);
             padding: 20px 0;
+            border-right: 1px solid var(--border-color);
+            overflow-y: auto;
+            position: sticky;
+            top: 120px;
+            height: calc(100vh - 120px);
         }
-        .sidebar-header {
+
+        .sidebar-section {
+            margin-bottom: 5px;
+        }
+
+        .sidebar-title {
+            color: var(--text-light);
             font-size: 13px;
-            font-weight: 700;
-            color: #000;
-            padding: 15px 20px 8px;
+            font-weight: 600;
+            padding: 12px 20px;
             text-transform: uppercase;
             letter-spacing: 0.5px;
         }
-        .sidebar-link {
+
+        .sidebar-item {
+            color: var(--text-gray);
+            text-decoration: none;
             display: block;
-            padding: 8px 20px;
-            font-size: 15px;
-            color: #000;
-            transition: background-color 0.2s;
+            padding: 10px 20px;
+            font-size: 14px;
+            transition: all 0.3s;
+            border-left: 3px solid transparent;
+            cursor: pointer;
         }
-        .sidebar-link:hover {
-            background-color: #fff;
+
+        .sidebar-item:hover {
+            background-color: rgba(4, 170, 109, 0.1);
+            color: var(--text-light);
         }
-        .sidebar-link.active {
-            background-color: #04AA6D;
-            color: #fff;
+
+        .sidebar-item.active {
+            background-color: var(--primary-green);
+            color: var(--text-light);
+            border-left-color: var(--primary-green);
+            font-weight: 500;
         }
-        /* Main Content */
+
+        /* Content Area */
         .content {
             flex: 1;
-            background-color: #fff;
-            min-height: calc(100vh - 95px);
+            padding: 40px 60px;
+            max-width: 1200px;
         }
-        .content-inner {
-            padding: 30px 50px;
-            max-width: 900px;
-        }
-        /* Breadcrumb */
-        .breadcrumb {
-            font-size: 13px;
-            margin-bottom: 20px;
-        }
-        .breadcrumb a {
-            color: #000;
-            margin-right: 10px;
-        }
-        .breadcrumb a:hover {
-            color: #04AA6D;
-        }
-        .breadcrumb span {
-            color: #777;
-        }
-        /* Main Title */
-        .main-title {
+
+        .content h1 {
             font-size: 42px;
-            font-weight: 400;
-            margin-bottom: 20px;
-            color: #000;
-        }
-        /* Next/Prev Navigation */
-        .next-prev {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 20px;
-        }
-        .prev-btn, .next-btn {
-            background-color: #04AA6D;
-            color: #fff;
-            padding: 10px 25px;
-            font-size: 15px;
-            border-radius: 5px;
-            transition: background-color 0.3s;
-        }
-        .prev-btn:hover, .next-btn:hover {
-            background-color: #059862;
-        }
-        /* Divider */
-        .divider {
-            border: none;
-            border-top: 1px solid #ddd;
-            margin: 25px 0;
-        }
-        /* Section Styles */
-        .section h2 {
-            font-size: 28px;
-            font-weight: 400;
-            margin-bottom: 15px;
-            color: #000;
-        }
-        .section p {
-            font-size: 15px;
-            line-height: 1.8;
-            margin-bottom: 15px;
-        }
-        /* Note Box */
-        .note {
-            background-color: #ffffcc;
-            border-left: 6px solid #ffeb3b;
-            padding: 20px;
-            margin: 20px 0;
-        }
-        .note p {
-            margin: 0;
-        }
-        /* Info Box */
-        .info-box {
-            background-color: #e7f3ff;
-            border-left: 6px solid #2196F3;
-            padding: 20px;
-            margin: 20px 0;
-        }
-        .info-box h3 {
-            font-size: 18px;
-            margin-bottom: 10px;
-        }
-        .info-box p {
-            margin-bottom: 8px;
-        }
-        .info-box p:last-child {
-            margin-bottom: 0;
-        }
-        /* Warning Box */
-        .warning {
-            background-color: #ffdddd;
-            border-left: 6px solid #f44336;
-            padding: 20px;
-            margin: 20px 0;
-        }
-        /* Lists */
-        .list {
-            margin: 15px 0 15px 30px;
-        }
-        .list li {
-            padding: 5px 0;
-            font-size: 15px;
-        }
-        .ordered-list {
-            margin: 15px 0 15px 30px;
-        }
-        .ordered-list li {
-            padding: 8px 0;
-            font-size: 15px;
-        }
-        /* Table */
-        .table-container {
-            overflow-x: auto;
-            margin: 20px 0;
-        }
-        .table {
-            width: 100%;
-            border-collapse: collapse;
-            font-size: 15px;
-        }
-        .table th {
-            background-color: #04AA6D;
-            color: #fff;
-            text-align: left;
-            padding: 12px 15px;
-            font-weight: 400;
-        }
-        .table td {
-            padding: 12px 15px;
-            border-bottom: 1px solid #ddd;
-        }
-        .table tr.alt {
-            background-color: #f9f9f9;
-        }
-        .table tr:hover {
-            background-color: #f1f1f1;
-        }
-        /* Example Box */
-        .example {
-            background-color: #fff;
-            border-left: 4px solid #04AA6D;
-            margin: 20px 0;
-        }
-        .example h3 {
-            background-color: #E7E9EB;
-            padding: 10px 20px;
-            font-size: 16px;
+            margin-bottom: 25px;
+            color: var(--text-light);
             font-weight: 600;
-            border-bottom: 1px solid #ddd;
         }
-        .example p {
-            padding: 10px 20px;
-            margin: 0;
+
+        .content h2 {
+            font-size: 28px;
+            margin-top: 35px;
+            margin-bottom: 18px;
+            color: var(--text-light);
+            font-weight: 600;
         }
+
+        .content p {
+            font-size: 16px;
+            line-height: 1.8;
+            margin-bottom: 18px;
+            color: #e0e0e0;
+        }
+
+        .content ul {
+            margin-left: 25px;
+            margin-bottom: 20px;
+        }
+
+        .content li {
+            font-size: 16px;
+            line-height: 1.8;
+            margin-bottom: 10px;
+            color: #e0e0e0;
+        }
+
         /* Code Block */
         .code-block {
-            background-color: #f1f1f1;
-            border-left: 4px solid #04AA6D;
-            overflow-x: auto;
-        }
-        .code-block pre {
-            font-family: 'Consolas', 'Courier New', monospace;
-            font-size: 14px;
+            background-color: var(--code-bg);
+            border-left: 4px solid var(--primary-green);
             padding: 20px;
-            margin: 0;
-            white-space: pre;
-            line-height: 1.5;
-        }
-        /* Try It Button */
-        .tryit-btn {
-            display: inline-block;
-            background-color: #04AA6D;
-            color: #fff;
-            padding: 10px 20px;
-            margin: 15px 20px 20px;
+            margin: 25px 0;
             border-radius: 5px;
+            overflow-x: auto;
+            font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+        }
+
+        .code-block code {
+            color: #ffffff;
             font-size: 14px;
-            font-weight: 600;
+            line-height: 1.6;
         }
-        .tryit-btn:hover {
-            background-color: #059862;
+
+        .keyword {
+            color: #569CD6;
         }
-        /* Card Container */
-        .card-container {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 20px;
-            margin: 20px 0;
+
+        .string {
+            color: #CE9178;
         }
-        .card {
-            background-color: #f9f9f9;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            padding: 25px;
-            text-align: center;
-            transition: transform 0.3s, box-shadow 0.3s;
+
+        .comment {
+            color: #6A9955;
+            font-style: italic;
         }
-        .card:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+
+        .function {
+            color: #DCDCAA;
         }
-        .card-icon {
-            font-size: 48px;
-            margin-bottom: 15px;
-        }
-        .card h3 {
-            font-size: 18px;
-            margin-bottom: 10px;
-            color: #000;
-        }
-        .card p {
-            font-size: 14px;
-            color: #666;
-            margin: 0;
-        }
-        /* Exercise Box */
-        .exercise {
-            background-color: #282A35;
-            color: #fff;
-            padding: 30px;
-            border-radius: 8px;
-            margin: 20px 0;
-        }
-        .exercise h2 {
-            color: #fff;
-            font-size: 24px;
-            margin-bottom: 20px;
-        }
-        .exercise h3 {
-            font-size: 18px;
-            margin-bottom: 15px;
-        }
-        .exercise p {
-            margin-bottom: 20px;
-        }
-        .exercise-input {
-            display: flex;
-            gap: 10px;
-            flex-wrap: wrap;
-        }
-        .exercise-input input {
-            flex: 1;
-            min-width: 200px;
-            padding: 12px 15px;
-            border: none;
-            border-radius: 5px;
-            font-size: 15px;
-        }
-        .submit-btn {
-            background-color: #04AA6D;
-            color: #fff;
+
+        /* Try it Yourself Button */
+        .try-button {
+            background-color: var(--primary-green);
+            color: white;
             border: none;
             padding: 12px 25px;
-            border-radius: 5px;
-            cursor: pointer;
             font-size: 15px;
             font-weight: 600;
-            white-space: nowrap;
-        }
-        .submit-btn:hover {
-            background-color: #059862;
-        }
-        /* Right Sidebar */
-        .right-sidebar {
-            width: 280px;
-            padding: 20px;
-            flex-shrink: 0;
-        }
-        .ad-container {
-            background-color: #fff;
-            padding: 20px;
-            text-align: center;
-            margin-bottom: 20px;
-            border: 1px solid #ddd;
-        }
-        .ad-placeholder {
-            background-color: #f1f1f1;
-            padding: 40px;
-            color: #999;
-            font-size: 12px;
-        }
-        .color-picker {
-            background-color: #fff;
-            padding: 20px;
-            text-align: center;
-            margin-bottom: 20px;
-            border: 1px solid #ddd;
-        }
-        .color-picker h3 {
-            font-size: 14px;
-            margin-bottom: 15px;
-        }
-        .color-gradient {
-            width: 100%;
-            height: 100px;
-            background: linear-gradient(to right, red, yellow, lime, aqua, blue, magenta, red);
-            margin-bottom: 15px;
-            border-radius: 5px;
-        }
-        .color-btn {
-            background-color: #04AA6D;
-            color: #fff;
-            border: none;
-            padding: 8px 15px;
             border-radius: 5px;
             cursor: pointer;
-            font-size: 13px;
+            margin: 20px 0;
+            transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
         }
-        .spaces-promo {
-            background-color: #282A35;
-            color: #fff;
-            padding: 25px;
-            text-align: center;
-            border-radius: 8px;
+
+        .try-button:hover {
+            background-color: #038f5d;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(4, 170, 109, 0.3);
         }
-        .spaces-promo h3 {
-            font-size: 16px;
-            margin-bottom: 10px;
+
+        /* Navigation Buttons */
+        .page-nav {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 50px;
+            padding-top: 30px;
+            border-top: 1px solid var(--border-color);
         }
-        .spaces-icon {
-            margin-right: 5px;
-        }
-        .spaces-promo p {
-            font-size: 13px;
-            margin-bottom: 15px;
-            color: #ccc;
-        }
-        .spaces-btn {
-            background-color: #04AA6D;
-            color: #fff;
+
+        .nav-button {
+            background-color: var(--primary-green);
+            color: white;
             border: none;
-            padding: 10px 20px;
-            border-radius: 25px;
-            cursor: pointer;
-            font-size: 14px;
+            padding: 14px 30px;
+            font-size: 15px;
             font-weight: 600;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
-        /* Footer */
-        .footer {
-            background-color: #282A35;
-            color: #fff;
-            padding: 50px 0 30px;
+
+        .nav-button:hover:not(:disabled) {
+            background-color: #038f5d;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(4, 170, 109, 0.3);
         }
-        .footer-inner {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
+
+        .nav-button:disabled {
+            background-color: #555;
+            cursor: not-allowed;
+            opacity: 0.5;
         }
-        .footer-top {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 30px;
-            margin-bottom: 40px;
-        }
-        .footer-section h3 {
-            font-size: 16px;
-            margin-bottom: 20px;
-            color: #fff;
-        }
-        .footer-section ul {
-            list-style: none;
-        }
-        .footer-section li {
-            margin-bottom: 10px;
-        }
-        .footer-section a {
-            color: #ddd;
-            font-size: 14px;
+
+        /* Bookmark Icon */
+        .bookmark {
+            position: absolute;
+            top: 40px;
+            right: 60px;
+            color: var(--text-gray);
+            font-size: 24px;
+            cursor: pointer;
             transition: color 0.3s;
         }
-        .footer-section a:hover {
-            color: #04AA6D;
+
+        .bookmark:hover {
+            color: var(--primary-green);
         }
-        .footer-bottom {
-            text-align: center;
-            padding-top: 30px;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
+
+        /* Progress Modal */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
         }
-        .footer-logo img {
-            height: 30px;
-            margin-bottom: 20px;
+
+        .modal-overlay.active {
+            display: flex;
         }
-        .copyright {
-            font-size: 13px;
-            color: #aaa;
-            margin-bottom: 10px;
+
+        .modal {
+            background-color: white;
+            border-radius: 10px;
+            width: 90%;
+            max-width: 650px;
+            padding: 0;
+            position: relative;
+            animation: modalSlideIn 0.3s ease-out;
         }
-        /* Responsive */
-        @media (max-width: 1100px) {
-            .right-sidebar {
-                display: none;
+
+        @keyframes modalSlideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
             }
         }
-        @media (max-width: 900px) {
+
+        .modal-header {
+            padding: 25px 30px;
+            border-bottom: 1px solid #e0e0e0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .modal-header-text {
+            color: #666;
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .modal-close {
+            background: none;
+            border: none;
+            font-size: 24px;
+            color: #666;
+            cursor: pointer;
+            padding: 0;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: color 0.3s;
+        }
+
+        .modal-close:hover {
+            color: #000;
+        }
+
+        .modal-body {
+            padding: 30px;
+        }
+
+        .modal-content-wrapper {
+            display: flex;
+            gap: 30px;
+        }
+
+        .modal-left {
+            flex: 1;
+        }
+
+        .modal-title {
+            font-size: 32px;
+            color: #000;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        .modal-subtitle {
+            font-size: 16px;
+            color: #333;
+            margin-bottom: 25px;
+        }
+
+        .modal-subtitle strong {
+            font-weight: 600;
+        }
+
+        .xp-display {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .xp-badge {
+            background-color: #4285F4;
+            color: white;
+            padding: 8px 20px;
+            border-radius: 25px;
+            font-weight: 700;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .xp-number {
+            font-size: 16px;
+        }
+
+        .fox-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #FF9A56, #FF6B35);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+        }
+
+        .progress-section {
+            margin-top: 25px;
+        }
+
+        .progress-title {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 10px;
+        }
+
+        .progress-percentage {
+            font-size: 18px;
+            color: #000;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .progress-bar-container {
+            width: 100%;
+            height: 8px;
+            background-color: #e0e0e0;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background-color: var(--primary-green);
+            border-radius: 10px;
+            transition: width 0.5s ease;
+        }
+
+        .modal-right {
+            width: 280px;
+            background-color: var(--primary-green);
+            border-radius: 8px;
+            padding: 35px 25px;
+            text-align: center;
+            color: white;
+        }
+
+        .cert-logo {
+            width: 60px;
+            height: 60px;
+            background: white;
+            border-radius: 50%;
+            margin: 0 auto 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 24px;
+            color: var(--primary-green);
+        }
+
+        .cert-title {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 10px;
+            line-height: 1.3;
+        }
+
+        .cert-price {
+            font-size: 32px;
+            font-weight: 700;
+            margin: 15px 0;
+        }
+
+        .cert-discount {
+            font-size: 14px;
+            margin-bottom: 20px;
+        }
+
+        .learn-more-btn {
+            background-color: white;
+            color: var(--primary-green);
+            border: none;
+            padding: 10px 25px;
+            font-size: 14px;
+            font-weight: 600;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .learn-more-btn:hover {
+            background-color: #f0f0f0;
+        }
+
+        .remove-ads {
+            margin-top: 20px;
+            color: white;
+            font-size: 13px;
+            text-decoration: none;
+            display: block;
+            transition: opacity 0.3s;
+        }
+
+        .remove-ads:hover {
+            opacity: 0.8;
+        }
+
+        .modal-footer {
+            padding: 0 30px 30px 30px;
+        }
+
+        .go-next-btn {
+            width: 100%;
+            background-color: var(--primary-green);
+            color: white;
+            border: none;
+            padding: 15px;
+            font-size: 16px;
+            font-weight: 600;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .go-next-btn:hover {
+            background-color: #038f5d;
+        }
+
+        /* Scrollbar Styling */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--darker-bg);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--border-color);
+            border-radius: 5px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #555;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
             .sidebar {
                 display: none;
             }
-            .nav-links {
-                display: none;
-            }
-            .content-inner {
+
+            .content {
                 padding: 20px;
             }
-            .main-title {
-                font-size: 32px;
-            }
-            .card-container {
-                grid-template-columns: 1fr;
-            }
-            .footer-top {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-        @media (max-width: 600px) {
-            .footer-top {
-                grid-template-columns: 1fr;
-            }
-            .next-prev {
+
+            .modal-content-wrapper {
                 flex-direction: column;
-                gap: 10px;
             }
-            .prev-btn, .next-btn {
-                text-align: center;
+
+            .modal-right {
+                width: 100%;
             }
         }
     </style>
 </head>
 <body>
-    <!-- Top Navigation -->
-    <header class="topnav">
-        <a href="#" class="logo">
-            <img src="https://www.w3schools.com/images/w3schools_logo_436_2.png" alt="W3Schools">
-        </a>
-        <nav class="nav-links">
-            <a href="#">Tutorials</a>
-            <a href="#">Exercises</a>
-            <a href="#">Certificates</a>
-            <a href="#">Services</a>
-        </nav>
-        <div class="nav-right">
-            <button class="search-btn">🔍</button>
-            <button class="theme-btn">🌙</button>
-            <button class="login-btn">Log in</button>
-            <button class="signup-btn">Sign Up</button>
+    <!-- Header -->
+    <header>
+        <div class="logo">
+            <div class="logo-icon">W<sup>3</sup></div>
+            <span class="logo-text">schools</span>
+        </div>
+        <div class="header-nav">
+            <a href="#" class="nav-link">Tutorials</a>
+            <a href="#" class="nav-link">References</a>
+            <a href="#" class="nav-link">Exercises</a>
+            <a href="#" class="nav-link">Certificates</a>
+        </div>
+        <div class="search-box">
+            <i class="fas fa-search" style="color: var(--text-gray);"></i>
+            <input type="text" placeholder="Search...">
+        </div>
+        <div class="header-icons">
+            <i class="fas fa-bars"></i>
+            <i class="far fa-moon"></i>
+            <i class="far fa-user"></i>
         </div>
     </header>
-    <!-- Secondary Navigation -->
-    <nav class="secondnav">
-        <div class="secondnav-inner">
-            <a href="#">HTML</a>
-            <a href="#">CSS</a>
-            <a href="#">JAVASCRIPT</a>
-            <a href="#">SQL</a>
-            <a href="#">PYTHON</a>
-            <a href="#">JAVA</a>
-            <a href="#">PHP</a>
-            <a href="#">HOW TO</a>
-            <a href="#">W3.CSS</a>
-            <a href="#" class="active">AI</a>
-            <a href="#">C</a>
-            <a href="#">C++</a>
-            <a href="#">C#</a>
-            <a href="#">BOOTSTRAP</a>
-            <a href="#">REACT</a>
-            <a href="#">MySQL</a>
+
+    <!-- Top Navigation -->
+    <nav class="top-nav">
+        <div class="top-nav-items">
+            <a href="#" class="top-nav-item">MYSQL</a>
+            <a href="#" class="top-nav-item">JQUERY</a>
+            <a href="#" class="top-nav-item">EXCEL</a>
+            <a href="#" class="top-nav-item">XML</a>
+            <a href="#" class="top-nav-item">DJANGO</a>
+            <a href="#" class="top-nav-item">NUMPY</a>
+            <a href="#" class="top-nav-item">PANDAS</a>
+            <a href="#" class="top-nav-item">NODEJS</a>
+            <a href="#" class="top-nav-item">DSA</a>
+            <a href="#" class="top-nav-item">TYPESCRIPT</a>
+            <a href="#" class="top-nav-item">ANGULAR</a>
+            <a href="#" class="top-nav-item">ANGULARJS</a>
+            <a href="#" class="top-nav-item">GIT</a>
+            <a href="#" class="top-nav-item">POSTGRESQL</a>
+            <a href="#" class="top-nav-item">MONGODB</a>
+            <a href="#" class="top-nav-item">ASP</a>
+            <a href="#" class="top-nav-item active">AI</a>
         </div>
     </nav>
-    <div class="main-container">
-        <!-- Left Sidebar -->
+
+    <!-- Main Container -->
+    <div class="container">
+        <!-- Sidebar -->
         <aside class="sidebar">
-            <div class="sidebar-inner">
-                <h2 class="sidebar-header">CNN Tutorial</h2>
-                <a href="#" class="sidebar-link active">CNN Home</a>
-                <a href="#" class="sidebar-link">CNN Introduction</a>
-                <a href="#" class="sidebar-link">CNN Architecture</a>
-                <a href="#" class="sidebar-link">Convolutional Layer</a>
-                <a href="#" class="sidebar-link">Pooling Layer</a>
-                <a href="#" class="sidebar-link">Fully Connected</a>
-                <a href="#" class="sidebar-link">Activation Functions</a>
-                <a href="#" class="sidebar-link">Training CNN</a>
-                <a href="#" class="sidebar-link">CNN Applications</a>
-                
-                <h2 class="sidebar-header">CNN Examples</h2>
-                <a href="#" class="sidebar-link">Image Classification</a>
-                <a href="#" class="sidebar-link">Object Detection</a>
-                <a href="#" class="sidebar-link">Face Recognition</a>
-                
-                <h2 class="sidebar-header">CNN Code</h2>
-                <a href="#" class="sidebar-link">Python CNN</a>
-                <a href="#" class="sidebar-link">TensorFlow CNN</a>
-                <a href="#" class="sidebar-link">PyTorch CNN</a>
+            <div class="sidebar-section">
+                <div class="sidebar-title">ML Training</div>
+                <div class="sidebar-item">ML Testing</div>
+                <div class="sidebar-item">ML Learning</div>
+                <div class="sidebar-item">ML Terminology</div>
+                <div class="sidebar-item">ML Data</div>
+                <div class="sidebar-item">ML Clustering</div>
+                <div class="sidebar-item">ML Regressions</div>
+                <div class="sidebar-item">ML Deep Learning</div>
+                <div class="sidebar-item">ML Brain.js</div>
+            </div>
+            <div class="sidebar-section">
+                <div class="sidebar-title">CNN Tutorial</div>
+                <div class="sidebar-item" data-page="0">Introduction to CNNs</div>
+                <div class="sidebar-item" data-page="1">Convolutional Layers</div>
+                <div class="sidebar-item" data-page="2">Pooling Layers</div>
+                <div class="sidebar-item" data-page="3">Activation Functions</div>
+                <div class="sidebar-item" data-page="4">Building Complete CNN</div>
+            </div>
+            <div class="sidebar-section">
+                <div class="sidebar-title">TensorFlow</div>
+                <div class="sidebar-item">TFJS Tutorial</div>
+                <div class="sidebar-item">TFJS Operations</div>
+                <div class="sidebar-item">TFJS Models</div>
+                <div class="sidebar-item">TFJS Visor</div>
+            </div>
+            <div class="sidebar-section">
+                <div class="sidebar-title">Example 1</div>
+                <div class="sidebar-item">Ex1 Intro</div>
+                <div class="sidebar-item">Ex1 Data</div>
+                <div class="sidebar-item">Ex1 Model</div>
+                <div class="sidebar-item">Ex1 Training</div>
             </div>
         </aside>
-        <!-- Main Content -->
+
+        <!-- Content Area -->
         <main class="content">
-            <div class="content-inner">
-                <!-- Breadcrumb -->
-                <div class="breadcrumb">
-                    <a href="#">❮ Home</a>
-                    <a href="#">AI</a>
-                    <a href="#">Machine Learning</a>
-                    <span>CNN</span>
-                </div>
-                <h1 class="main-title">CNN - Convolutional Neural Networks</h1>
-                
-                <div class="next-prev">
-                    <a href="#" class="prev-btn">❮ Previous</a>
-                    <a href="#" class="next-btn">Next ❯</a>
-                </div>
-                <hr class="divider">
-                <!-- Introduction Section -->
-                <section class="section">
-                    <h2>What is a CNN?</h2>
-                    <p>
-                        A <strong>Convolutional Neural Network (CNN)</strong> is a type of deep learning algorithm 
-                        that is particularly powerful for analyzing visual imagery.
-                    </p>
-                    <p>
-                        CNNs are designed to automatically and adaptively learn spatial hierarchies of features 
-                        from input images through backpropagation.
-                    </p>
-                    <div class="note">
-                        <p>
-                            <strong>Note:</strong> CNNs are widely used in image recognition, video analysis, 
-                            medical image analysis, and natural language processing.
-                        </p>
-                    </div>
-                </section>
-                <hr class="divider">
-                <!-- Why CNN Section -->
-                <section class="section">
-                    <h2>Why Use CNNs?</h2>
-                    <p>Traditional neural networks don't scale well to full images. CNNs solve this problem by:</p>
-                    
-                    <ul class="list">
-                        <li>Reducing the number of parameters through weight sharing</li>
-                        <li>Automatically detecting important features without human supervision</li>
-                        <li>Being translation invariant (detecting objects regardless of position)</li>
-                        <li>Handling images of varying sizes</li>
-                    </ul>
-                </section>
-                <hr class="divider">
-                <!-- Architecture Section -->
-                <section class="section">
-                    <h2>CNN Architecture</h2>
-                    <p>A typical CNN architecture consists of the following layers:</p>
-                    <div class="table-container">
-                        <table class="table">
-                            <thead>
-                                <tr>
-                                    <th>Layer</th>
-                                    <th>Description</th>
-                                    <th>Purpose</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>Input Layer</td>
-                                    <td>Receives the raw pixel values of the image</td>
-                                    <td>Data entry point</td>
-                                </tr>
-                                <tr class="alt">
-                                    <td>Convolutional Layer</td>
-                                    <td>Applies filters to detect features like edges</td>
-                                    <td>Feature extraction</td>
-                                </tr>
-                                <tr>
-                                    <td>Pooling Layer</td>
-                                    <td>Reduces spatial dimensions of feature maps</td>
-                                    <td>Dimensionality reduction</td>
-                                </tr>
-                                <tr class="alt">
-                                    <td>Fully Connected</td>
-                                    <td>Traditional neural network layers</td>
-                                    <td>Classification</td>
-                                </tr>
-                                <tr>
-                                    <td>Output Layer</td>
-                                    <td>Produces final predictions</td>
-                                    <td>Results</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </section>
-                <hr class="divider">
-                <!-- Convolution Operation Section -->
-                <section class="section">
-                    <h2>The Convolution Operation</h2>
-                    <p>
-                        The convolution operation involves sliding a <strong>filter (kernel)</strong> over 
-                        the input image and computing the dot product at each position.
-                    </p>
-                    <div class="example">
-                        <h3>Example</h3>
-                        <p>A simple 3x3 edge detection kernel:</p>
-                        <div class="code-block">
-                            <pre># Edge Detection Kernel
-kernel = [
-    [-1, -1, -1],
-    [-1,  8, -1],
-    [-1, -1, -1]
-]
-# This kernel highlights edges in images
-# by detecting rapid changes in pixel intensity</pre>
+            <i class="far fa-bookmark bookmark"></i>
+            <div id="page-content">
+                <!-- Content will be loaded here by JavaScript -->
+            </div>
+
+            <!-- Navigation Buttons -->
+            <div class="page-nav">
+                <button class="nav-button" id="prev-btn" disabled>
+                    <i class="fas fa-chevron-left"></i> Previous
+                </button>
+                <button class="nav-button" id="next-btn">
+                    Next <i class="fas fa-chevron-right"></i>
+                </button>
+            </div>
+        </main>
+    </div>
+
+    <!-- Progress Modal -->
+    <div class="modal-overlay" id="progress-modal">
+        <div class="modal">
+            <div class="modal-header">
+                <span class="modal-header-text">ACTIVITY COMPLETED</span>
+                <button class="modal-close" id="close-modal">×</button>
+            </div>
+            <div class="modal-body">
+                <div class="modal-content-wrapper">
+                    <div class="modal-left">
+                        <h2 class="modal-title">Nice Work!</h2>
+                        <p class="modal-subtitle">You've finished <strong>Convolutional Neural Networks Tutorial</strong></p>
+                        
+                        <div class="xp-display">
+                            <div class="xp-badge">
+                                <span>XP</span>
+                                <span class="xp-number" id="xp-earned">+10 XP</span>
+                            </div>
+                            <div class="fox-icon">🦊</div>
                         </div>
-                        <a href="#" class="tryit-btn">Try it Yourself »</a>
-                    </div>
-                </section>
-                <hr class="divider">
-                <!-- Pooling Section -->
-                <section class="section">
-                    <h2>Pooling Layers</h2>
-                    <p>
-                        Pooling layers reduce the spatial dimensions of the feature maps, which helps to:
-                    </p>
-                    <ul class="list">
-                        <li>Reduce computational cost</li>
-                        <li>Reduce overfitting</li>
-                        <li>Make the detection more robust to position changes</li>
-                    </ul>
-                    <div class="info-box">
-                        <h3>Types of Pooling</h3>
-                        <p><strong>Max Pooling:</strong> Takes the maximum value from each region</p>
-                        <p><strong>Average Pooling:</strong> Takes the average value from each region</p>
-                        <p><strong>Global Pooling:</strong> Reduces each feature map to a single value</p>
-                    </div>
-                    <div class="example">
-                        <h3>Example</h3>
-                        <p>Max Pooling with a 2x2 window:</p>
-                        <div class="code-block">
-                            <pre># Max Pooling Example
-import torch.nn as nn
-# Define max pooling layer
-max_pool = nn.MaxPool2d(kernel_size=2, stride=2)
-# Input: 4x4 feature map
-# Output: 2x2 feature map
-# Example:
-# Input:          Output:
-# [1, 2, 3, 4]    [6, 8]
-# [5, 6, 7, 8] -> [14, 16]
-# [9, 10, 11, 12]
-# [13, 14, 15, 16]</pre>
-                        </div>
-                        <a href="#" class="tryit-btn">Try it Yourself »</a>
-                    </div>
-                </section>
-                <hr class="divider">
-                <!-- Complete CNN Example -->
-                <section class="section">
-                    <h2>Complete CNN Example</h2>
-                    <p>Here's a complete CNN implementation using PyTorch for image classification:</p>
-                    <div class="example">
-                        <h3>Example</h3>
-                        <div class="code-block">
-                            <pre>import torch
-import torch.nn as nn
-import torch.nn.functional as F
-class CNN(nn.Module):
-    def __init__(self):
-        super(CNN, self).__init__()
-        # Convolutional layers
-        self.conv1 = nn.Conv2d(1, 32, kernel_size=3, padding=1)
-        self.conv2 = nn.Conv2d(32, 64, kernel_size=3, padding=1)
-        
-        # Pooling layer
-        self.pool = nn.MaxPool2d(2, 2)
-        
-        # Fully connected layers
-        self.fc1 = nn.Linear(64 * 7 * 7, 128)
-        self.fc2 = nn.Linear(128, 10)
-        
-        # Dropout for regularization
-        self.dropout = nn.Dropout(0.25)
-    
-    def forward(self, x):
-        # First conv block
-        x = self.pool(F.relu(self.conv1(x)))
-        
-        # Second conv block
-        x = self.pool(F.relu(self.conv2(x)))
-        
-        # Flatten
-        x = x.view(-1, 64 * 7 * 7)
-        
-        # Fully connected layers
-        x = F.relu(self.fc1(x))
-        x = self.dropout(x)
-        x = self.fc2(x)
-        
-        return x
-# Create model instance
-model = CNN()
-print(model)</pre>
-                        </div>
-                        <a href="#" class="tryit-btn">Try it Yourself »</a>
-                    </div>
-                </section>
-                <hr class="divider">
-                <!-- Activation Functions -->
-                <section class="section">
-                    <h2>Activation Functions in CNNs</h2>
-                    <p>Activation functions introduce non-linearity into the network:</p>
-                    <div class="table-container">
-                        <table class="table">
-                            <thead>
-                                <tr>
-                                    <th>Function</th>
-                                    <th>Formula</th>
-                                    <th>Use Case</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>ReLU</td>
-                                    <td>max(0, x)</td>
-                                    <td>Most common, hidden layers</td>
-                                </tr>
-                                <tr class="alt">
-                                    <td>Leaky ReLU</td>
-                                    <td>max(0.01x, x)</td>
-                                    <td>Prevents dying neurons</td>
-                                </tr>
-                                <tr>
-                                    <td>Sigmoid</td>
-                                    <td>1 / (1 + e^-x)</td>
-                                    <td>Binary classification</td>
-                                </tr>
-                                <tr class="alt">
-                                    <td>Softmax</td>
-                                    <td>e^xi / Σe^xj</td>
-                                    <td>Multi-class output</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <div class="warning">
-                        <p>
-                            <strong>Warning:</strong> ReLU can cause "dying neurons" where neurons output 0 
-                            for all inputs. Consider using Leaky ReLU or other variants.
-                        </p>
-                    </div>
-                </section>
-                <hr class="divider">
-                <!-- CNN Applications -->
-                <section class="section">
-                    <h2>CNN Applications</h2>
-                    
-                    <div class="card-container">
-                        <div class="card">
-                            <div class="card-icon">🖼️</div>
-                            <h3>Image Classification</h3>
-                            <p>Categorizing images into predefined classes (e.g., cat vs dog)</p>
-                        </div>
-                        <div class="card">
-                            <div class="card-icon">📦</div>
-                            <h3>Object Detection</h3>
-                            <p>Identifying and locating objects within images</p>
-                        </div>
-                        <div class="card">
-                            <div class="card-icon">👤</div>
-                            <h3>Face Recognition</h3>
-                            <p>Identifying individuals based on facial features</p>
-                        </div>
-                        <div class="card">
-                            <div class="card-icon">🏥</div>
-                            <h3>Medical Imaging</h3>
-                            <p>Detecting diseases in X-rays, MRIs, and CT scans</p>
-                        </div>
-                    </div>
-                </section>
-                <hr class="divider">
-                <!-- Training Section -->
-                <section class="section">
-                    <h2>Training a CNN</h2>
-                    <p>Training a CNN involves the following steps:</p>
-                    <ol class="ordered-list">
-                        <li><strong>Forward Pass:</strong> Input data flows through the network</li>
-                        <li><strong>Loss Calculation:</strong> Compare predictions with actual labels</li>
-                        <li><strong>Backward Pass:</strong> Calculate gradients using backpropagation</li>
-                        <li><strong>Weight Update:</strong> Adjust weights using an optimizer (e.g., Adam, SGD)</li>
-                        <li><strong>Repeat:</strong> Continue for multiple epochs until convergence</li>
-                    </ol>
-                    <div class="example">
-                        <h3>Example</h3>
-                        <p>Training loop in PyTorch:</p>
-                        <div class="code-block">
-                            <pre># Training loop
-criterion = nn.CrossEntropyLoss()
-optimizer = torch.optim.Adam(model.parameters(), lr=0.001)
-for epoch in range(num_epochs):
-    for images, labels in train_loader:
-        # Forward pass
-        outputs = model(images)
-        loss = criterion(outputs, labels)
-        
-        # Backward pass
-        optimizer.zero_grad()
-        loss.backward()
-        optimizer.step()
-    
-    print(f'Epoch [{epoch+1}/{num_epochs}], Loss: {loss.item():.4f}')</pre>
-                        </div>
-                        <a href="#" class="tryit-btn">Try it Yourself »</a>
-                    </div>
-                </section>
-                <hr class="divider">
-                <!-- Exercise Section -->
-                <section class="section">
-                    <div class="exercise">
-                        <h2>Test Yourself With Exercises</h2>
-                        <div class="exercise-content">
-                            <h3>Exercise:</h3>
-                            <p>What layer is used to reduce the spatial dimensions of feature maps?</p>
-                            <div class="exercise-input">
-                                <input type="text" placeholder="Enter your answer">
-                                <button class="submit-btn">Submit Answer »</button>
+
+                        <div class="progress-section">
+                            <div class="progress-title">AI Tutorial</div>
+                            <div class="progress-percentage"><span id="progress-percent">20</span>% complete</div>
+                            <div class="progress-bar-container">
+                                <div class="progress-bar" id="progress-bar" style="width: 20%;"></div>
                             </div>
                         </div>
                     </div>
-                </section>
-                <hr class="divider">
-                <!-- Navigation -->
-                <div class="next-prev">
-                    <a href="#" class="prev-btn">❮ Previous</a>
-                    <a href="#" class="next-btn">Next ❯</a>
+                    <div class="modal-right">
+                        <div class="cert-logo">W<sup>3</sup></div>
+                        <div class="cert-title">CERTIFICATES THAT GET YOU HIRED</div>
+                        <div class="cert-price">for $499</div>
+                        <div class="cert-discount">Save 75%</div>
+                        <button class="learn-more-btn">Learn more</button>
+                        <a href="#" class="remove-ads">REMOVE ADS</a>
+                    </div>
                 </div>
             </div>
-        </main>
-        <!-- Right Sidebar -->
-        <aside class="right-sidebar">
-            <div class="ad-container">
-                <div class="ad-placeholder">
-                    <span>ADVERTISEMENT</span>
-                </div>
-            </div>
-            
-            <div class="color-picker">
-                <h3>COLOR PICKER</h3>
-                <div class="color-gradient"></div>
-                <button class="color-btn">Pick a Color</button>
-            </div>
-            <div class="spaces-promo">
-                <h3>
-                    <span class="spaces-icon">🚀</span>
-                    Get your own website
-                </h3>
-                <p>Get a free website with W3Schools Spaces</p>
-                <button class="spaces-btn">Create Website</button>
-            </div>
-        </aside>
-    </div>
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="footer-inner">
-            <div class="footer-top">
-                <div class="footer-section">
-                    <h3>Top Tutorials</h3>
-                    <ul>
-                        <li><a href="#">HTML Tutorial</a></li>
-                        <li><a href="#">CSS Tutorial</a></li>
-                        <li><a href="#">JavaScript Tutorial</a></li>
-                        <li><a href="#">Python Tutorial</a></li>
-                        <li><a href="#">SQL Tutorial</a></li>
-                    </ul>
-                </div>
-                <div class="footer-section">
-                    <h3>Top References</h3>
-                    <ul>
-                        <li><a href="#">HTML Reference</a></li>
-                        <li><a href="#">CSS Reference</a></li>
-                        <li><a href="#">JavaScript Reference</a></li>
-                        <li><a href="#">SQL Reference</a></li>
-                        <li><a href="#">Python Reference</a></li>
-                    </ul>
-                </div>
-                <div class="footer-section">
-                    <h3>Top Examples</h3>
-                    <ul>
-                        <li><a href="#">HTML Examples</a></li>
-                        <li><a href="#">CSS Examples</a></li>
-                        <li><a href="#">JavaScript Examples</a></li>
-                        <li><a href="#">Python Examples</a></li>
-                        <li><a href="#">SQL Examples</a></li>
-                    </ul>
-                </div>
-                <div class="footer-section">
-                    <h3>Get Certified</h3>
-                    <ul>
-                        <li><a href="#">HTML Certificate</a></li>
-                        <li><a href="#">CSS Certificate</a></li>
-                        <li><a href="#">JavaScript Certificate</a></li>
-                        <li><a href="#">Python Certificate</a></li>
-                        <li><a href="#">SQL Certificate</a></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <div class="footer-logo">
-                    <img src="https://www.w3schools.com/images/w3schools_logo_436_2.png" alt="W3Schools">
-                </div>
-                <p class="copyright">
-                    W3Schools is optimized for learning and training. Examples might be simplified to improve reading and learning.
-                </p>
-                <p class="copyright">
-                    © 1999-2025 by Refsnes Data. All Rights Reserved.
-                </p>
+            <div class="modal-footer">
+                <button class="go-next-btn" id="modal-next-btn">
+                    Go Next <i class="fas fa-chevron-right"></i>
+                </button>
             </div>
         </div>
-    </footer>
+    </div>
+
+    <script>
+        // CNN Tutorial Pages Content
+        const pages = [
+            {
+                id: 1,
+                title: "Introduction to CNNs",
+                content: `
+                    <h1>Convolutional Neural Networks (CNNs)</h1>
+                    
+                    <p>Convolutional Neural Networks (CNNs) are a class of deep neural networks that are particularly effective for analyzing visual imagery. They are widely used in image recognition, object detection, and computer vision tasks.</p>
+                    
+                    <h2>What is a CNN?</h2>
+                    
+                    <p>A Convolutional Neural Network is a Deep Learning algorithm which can take in an input image, assign importance (learnable weights and biases) to various aspects/objects in the image, and be able to differentiate one from the other.</p>
+                    
+                    <p>The key advantage of CNNs over traditional neural networks is that they can automatically learn spatial hierarchies of features through backpropagation.</p>
+                    
+                    <h2>Key Components of CNNs</h2>
+                    
+                    <ul>
+                        <li><strong>Convolutional Layers:</strong> Apply filters to detect features like edges, textures, and patterns</li>
+                        <li><strong>Pooling Layers:</strong> Reduce spatial dimensions while retaining important information</li>
+                        <li><strong>Fully Connected Layers:</strong> Make final classifications based on extracted features</li>
+                        <li><strong>Activation Functions:</strong> Introduce non-linearity into the network (ReLU, Sigmoid, etc.)</li>
+                    </ul>
+                    
+                    <h2>Why Use CNNs?</h2>
+                    
+                    <p>CNNs are particularly well-suited for image-related tasks because:</p>
+                    
+                    <ul>
+                        <li>They preserve spatial relationships between pixels</li>
+                        <li>They require fewer parameters than fully connected networks</li>
+                        <li>They are translation invariant - can recognize patterns anywhere in the image</li>
+                        <li>They can learn hierarchical features automatically</li>
+                    </ul>
+                    
+                    <div class="code-block">
+                        <code><span class="comment">// Example: Basic CNN architecture in TensorFlow.js</span>
+<span class="keyword">const</span> model = tf.<span class="function">sequential</span>();
+
+<span class="comment">// Add convolutional layer</span>
+model.<span class="function">add</span>(tf.layers.<span class="function">conv2d</span>({
+    inputShape: [<span class="string">28</span>, <span class="string">28</span>, <span class="string">1</span>],
+    filters: <span class="string">32</span>,
+    kernelSize: <span class="string">3</span>,
+    activation: <span class="string">'relu'</span>
+}));
+
+<span class="comment">// Add pooling layer</span>
+model.<span class="function">add</span>(tf.layers.<span class="function">maxPooling2d</span>({poolSize: <span class="string">2</span>}));
+                        </code>
+                    </div>
+                    
+                    <button class="try-button">
+                        Try it Yourself »
+                    </button>
+                `
+            },
+            {
+                id: 2,
+                title: "Convolutional Layers",
+                content: `
+                    <h1>Convolutional Layers</h1>
+                    
+                    <p>The convolutional layer is the core building block of a CNN. It performs the heavy lifting of feature extraction by applying various filters (kernels) to the input image.</p>
+                    
+                    <h2>How Convolution Works</h2>
+                    
+                    <p>Convolution is a mathematical operation that takes two inputs:</p>
+                    
+                    <ul>
+                        <li><strong>Input Image:</strong> A multi-dimensional array of pixel values</li>
+                        <li><strong>Filter/Kernel:</strong> A small matrix that slides over the input</li>
+                    </ul>
+                    
+                    <p>The filter slides across the image (convolution operation), computing the dot product at each position. This produces a feature map that highlights specific patterns like edges or textures.</p>
+                    
+                    <h2>Key Parameters</h2>
+                    
+                    <ul>
+                        <li><strong>Filter Size:</strong> Typically 3x3 or 5x5 matrices</li>
+                        <li><strong>Stride:</strong> How many pixels the filter moves at each step</li>
+                        <li><strong>Padding:</strong> Adding zeros around the input to control output size</li>
+                        <li><strong>Number of Filters:</strong> Multiple filters detect different features</li>
+                    </ul>
+                    
+                    <div class="code-block">
+                        <code><span class="comment">// Creating a convolutional layer</span>
+tf.layers.<span class="function">conv2d</span>({
+    <span class="comment">// Input shape: [height, width, channels]</span>
+    inputShape: [<span class="string">224</span>, <span class="string">224</span>, <span class="string">3</span>],
+    
+    <span class="comment">// Number of filters to apply</span>
+    filters: <span class="string">64</span>,
+    
+    <span class="comment">// Size of each filter</span>
+    kernelSize: <span class="string">3</span>,
+    
+    <span class="comment">// Stride: how much to move the filter</span>
+    strides: <span class="string">1</span>,
+    
+    <span class="comment">// Padding to preserve dimensions</span>
+    padding: <span class="string">'same'</span>,
+    
+    <span class="comment">// Activation function</span>
+    activation: <span class="string">'relu'</span>
+});
+                        </code>
+                    </div>
+                    
+                    <h2>Feature Maps</h2>
+                    
+                    <p>Each filter produces a feature map that highlights where specific features are detected in the input. Multiple filters can detect different features like:</p>
+                    
+                    <ul>
+                        <li>Horizontal and vertical edges</li>
+                        <li>Corners and curves</li>
+                        <li>Textures and patterns</li>
+                        <li>More complex shapes in deeper layers</li>
+                    </ul>
+                    
+                    <button class="try-button">
+                        Try it Yourself »
+                    </button>
+                `
+            },
+            {
+                id: 3,
+                title: "Pooling Layers",
+                content: `
+                    <h1>Pooling Layers</h1>
+                    
+                    <p>Pooling layers reduce the spatial dimensions of the feature maps while retaining the most important information. This helps decrease computational complexity and control overfitting.</p>
+                    
+                    <h2>Types of Pooling</h2>
+                    
+                    <p>There are two main types of pooling operations:</p>
+                    
+                    <ul>
+                        <li><strong>Max Pooling:</strong> Takes the maximum value from each region</li>
+                        <li><strong>Average Pooling:</strong> Takes the average value from each region</li>
+                    </ul>
+                    
+                    <h2>Max Pooling</h2>
+                    
+                    <p>Max pooling is the most commonly used pooling method. It slides a window over the feature map and outputs the maximum value in each region. This preserves the strongest activations.</p>
+                    
+                    <div class="code-block">
+                        <code><span class="comment">// Max pooling example</span>
+<span class="keyword">const</span> poolingLayer = tf.layers.<span class="function">maxPooling2d</span>({
+    <span class="comment">// Size of pooling window</span>
+    poolSize: [<span class="string">2</span>, <span class="string">2</span>],
+    
+    <span class="comment">// Stride (usually same as pool size)</span>
+    strides: [<span class="string">2</span>, <span class="string">2</span>],
+    
+    <span class="comment">// Padding</span>
+    padding: <span class="string">'valid'</span>
+});
+
+<span class="comment">// This reduces a 28x28 feature map to 14x14</span>
+                        </code>
+                    </div>
+                    
+                    <h2>Benefits of Pooling</h2>
+                    
+                    <ul>
+                        <li><strong>Dimensionality Reduction:</strong> Reduces the number of parameters and computation</li>
+                        <li><strong>Translation Invariance:</strong> Makes the network more robust to small shifts in input</li>
+                        <li><strong>Feature Selection:</strong> Keeps the most important features while discarding less relevant information</li>
+                        <li><strong>Overfitting Prevention:</strong> Acts as a form of regularization</li>
+                    </ul>
+                    
+                    <h2>Pooling Size Trade-offs</h2>
+                    
+                    <p>The choice of pooling size affects the network:</p>
+                    
+                    <ul>
+                        <li>Larger pooling windows (3x3, 4x4) reduce dimensions faster but may lose important details</li>
+                        <li>Smaller pooling windows (2x2) preserve more information but reduce dimensions more slowly</li>
+                        <li>2x2 with stride 2 is the most common configuration</li>
+                    </ul>
+                    
+                    <button class="try-button">
+                        Try it Yourself »
+                    </button>
+                `
+            },
+            {
+                id: 4,
+                title: "Activation Functions",
+                content: `
+                    <h1>Activation Functions in CNNs</h1>
+                    
+                    <p>Activation functions introduce non-linearity into the neural network, allowing it to learn complex patterns. Without activation functions, a neural network would simply be a linear regression model.</p>
+                    
+                    <h2>Common Activation Functions</h2>
+                    
+                    <h2>ReLU (Rectified Linear Unit)</h2>
+                    
+                    <p>ReLU is the most popular activation function for CNNs. It's simple yet effective:</p>
+                    
+                    <div class="code-block">
+                        <code><span class="comment">// ReLU function: f(x) = max(0, x)</span>
+<span class="keyword">const</span> relu = <span class="function">(x)</span> => Math.<span class="function">max</span>(<span class="string">0</span>, x);
+
+<span class="comment">// In TensorFlow.js</span>
+model.<span class="function">add</span>(tf.layers.<span class="function">conv2d</span>({
+    filters: <span class="string">32</span>,
+    kernelSize: <span class="string">3</span>,
+    activation: <span class="string">'relu'</span>  <span class="comment">// ReLU activation</span>
+}));
+                        </code>
+                    </div>
+                    
+                    <p><strong>Advantages of ReLU:</strong></p>
+                    <ul>
+                        <li>Computationally efficient - simple max operation</li>
+                        <li>Helps prevent vanishing gradient problem</li>
+                        <li>Sparse activation - neurons either fire or don't</li>
+                        <li>Fast convergence during training</li>
+                    </ul>
+                    
+                    <h2>Sigmoid</h2>
+                    
+                    <p>Sigmoid squashes values between 0 and 1, useful for binary classification:</p>
+                    
+                    <div class="code-block">
+                        <code><span class="comment">// Sigmoid function: f(x) = 1 / (1 + e^(-x))</span>
+model.<span class="function">add</span>(tf.layers.<span class="function">dense</span>({
+    units: <span class="string">1</span>,
+    activation: <span class="string">'sigmoid'</span>  <span class="comment">// Often used in output layer</span>
+}));
+                        </code>
+                    </div>
+                    
+                    <h2>Softmax</h2>
+                    
+                    <p>Softmax is used for multi-class classification in the output layer:</p>
+                    
+                    <div class="code-block">
+                        <code><span class="comment">// Softmax for multi-class classification</span>
+model.<span class="function">add</span>(tf.layers.<span class="function">dense</span>({
+    units: <span class="string">10</span>,  <span class="comment">// 10 classes</span>
+    activation: <span class="string">'softmax'</span>  <span class="comment">// Outputs probabilities</span>
+}));
+
+<span class="comment">// Softmax converts logits to probabilities that sum to 1</span>
+                        </code>
+                    </div>
+                    
+                    <h2>When to Use Each</h2>
+                    
+                    <ul>
+                        <li><strong>ReLU:</strong> Default choice for hidden layers in CNNs</li>
+                        <li><strong>Sigmoid:</strong> Binary classification output layers</li>
+                        <li><strong>Softmax:</strong> Multi-class classification output layers</li>
+                        <li><strong>Tanh:</strong> Sometimes used instead of ReLU, outputs between -1 and 1</li>
+                    </ul>
+                    
+                    <button class="try-button">
+                        Try it Yourself »
+                    </button>
+                `
+            },
+            {
+                id: 5,
+                title: "Building a Complete CNN",
+                content: `
+                    <h1>Building a Complete CNN Model</h1>
+                    
+                    <p>Now let's put everything together and build a complete CNN model for image classification using TensorFlow.js.</p>
+                    
+                    <h2>Complete CNN Architecture</h2>
+                    
+                    <p>A typical CNN architecture includes:</p>
+                    
+                    <ul>
+                        <li>Input layer</li>
+                        <li>Multiple convolutional + pooling layer pairs</li>
+                        <li>Flatten layer to convert 2D to 1D</li>
+                        <li>Fully connected (dense) layers</li>
+                        <li>Output layer with appropriate activation</li>
+                    </ul>
+                    
+                    <div class="code-block">
+                        <code><span class="comment">// Complete CNN Model for MNIST digit classification</span>
+<span class="keyword">const</span> model = tf.<span class="function">sequential</span>();
+
+<span class="comment">// First Convolutional Block</span>
+model.<span class="function">add</span>(tf.layers.<span class="function">conv2d</span>({
+    inputShape: [<span class="string">28</span>, <span class="string">28</span>, <span class="string">1</span>],
+    filters: <span class="string">32</span>,
+    kernelSize: <span class="string">3</span>,
+    activation: <span class="string">'relu'</span>
+}));
+model.<span class="function">add</span>(tf.layers.<span class="function">maxPooling2d</span>({poolSize: <span class="string">2</span>}));
+
+<span class="comment">// Second Convolutional Block</span>
+model.<span class="function">add</span>(tf.layers.<span class="function">conv2d</span>({
+    filters: <span class="string">64</span>,
+    kernelSize: <span class="string">3</span>,
+    activation: <span class="string">'relu'</span>
+}));
+model.<span class="function">add</span>(tf.layers.<span class="function">maxPooling2d</span>({poolSize: <span class="string">2</span>}));
+
+<span class="comment">// Flatten and Dense Layers</span>
+model.<span class="function">add</span>(tf.layers.<span class="function">flatten</span>());
+model.<span class="function">add</span>(tf.layers.<span class="function">dense</span>({
+    units: <span class="string">128</span>,
+    activation: <span class="string">'relu'</span>
+}));
+
+<span class="comment">// Dropout for regularization</span>
+model.<span class="function">add</span>(tf.layers.<span class="function">dropout</span>({rate: <span class="string">0.5</span>}));
+
+<span class="comment">// Output Layer</span>
+model.<span class="function">add</span>(tf.layers.<span class="function">dense</span>({
+    units: <span class="string">10</span>,
+    activation: <span class="string">'softmax'</span>
+}));
+
+<span class="comment">// Compile the model</span>
+model.<span class="function">compile</span>({
+    optimizer: <span class="string">'adam'</span>,
+    loss: <span class="string">'categoricalCrossentropy'</span>,
+    metrics: [<span class="string">'accuracy'</span>]
+});
+                        </code>
+                    </div>
+                    
+                    <h2>Training the Model</h2>
+                    
+                    <p>Once the architecture is defined, you can train the model:</p>
+                    
+                    <div class="code-block">
+                        <code><span class="comment">// Train the model</span>
+<span class="keyword">await</span> model.<span class="function">fit</span>(trainImages, trainLabels, {
+    epochs: <span class="string">10</span>,
+    batchSize: <span class="string">32</span>,
+    validationSplit: <span class="string">0.2</span>,
+    callbacks: {
+        <span class="function">onEpochEnd:</span> <span class="keyword">async</span> (epoch, logs) => {
+            console.<span class="function">log</span>(<span class="string">\`Epoch \${epoch + 1}: loss = \${logs.loss}\`</span>);
+        }
+    }
+});
+                        </code>
+                    </div>
+                    
+                    <h2>Making Predictions</h2>
+                    
+                    <div class="code-block">
+                        <code><span class="comment">// Make predictions on new data</span>
+<span class="keyword">const</span> predictions = model.<span class="function">predict</span>(testImages);
+
+<span class="comment">// Get the predicted class</span>
+<span class="keyword">const</span> predictedClass = predictions.<span class="function">argMax</span>(-<span class="string">1</span>);
+                        </code>
+                    </div>
+                    
+                    <h2>Key Takeaways</h2>
+                    
+                    <ul>
+                        <li>CNNs automatically learn hierarchical features from images</li>
+                        <li>Start with simple architectures and gradually increase complexity</li>
+                        <li>Use appropriate activation functions for each layer type</li>
+                        <li>Include regularization techniques like dropout to prevent overfitting</li>
+                        <li>Always validate your model on unseen data</li>
+                    </ul>
+                    
+                    <button class="try-button">
+                        Try it Yourself »
+                    </button>
+                    
+                    <p style="margin-top: 40px; padding: 20px; background-color: rgba(4, 170, 109, 0.1); border-left: 4px solid var(--primary-green); border-radius: 5px;">
+                        <strong>Congratulations!</strong> You've completed the CNN tutorial. You now understand the core concepts of Convolutional Neural Networks and how to build them using TensorFlow.js.
+                    </p>
+                `
+            }
+        ];
+
+        // Progress tracking
+        let currentPage = 0;
+        let totalXP = 0;
+        const xpPerPage = 10;
+
+        // Initialize the page
+        function init() {
+            loadPage(currentPage);
+            updateNavigationButtons();
+        }
+
+        // Load page content
+        function loadPage(pageIndex) {
+            const contentDiv = document.getElementById('page-content');
+            contentDiv.innerHTML = pages[pageIndex].content;
+            
+            // Scroll to top
+            window.scrollTo(0, 0);
+            
+            // Update sidebar active state
+            updateSidebarActive(pageIndex);
+        }
+
+        // Update sidebar active item
+        function updateSidebarActive(pageIndex) {
+            // Remove active class from all sidebar items
+            const allSidebarItems = document.querySelectorAll('.sidebar-item');
+            allSidebarItems.forEach(item => item.classList.remove('active'));
+            
+            // Add active class to current page's sidebar item
+            const currentSidebarItem = document.querySelector(`.sidebar-item[data-page="${pageIndex}"]`);
+            if (currentSidebarItem) {
+                currentSidebarItem.classList.add('active');
+            }
+        }
+
+        // Update navigation buttons
+        function updateNavigationButtons() {
+            const prevBtn = document.getElementById('prev-btn');
+            const nextBtn = document.getElementById('next-btn');
+            
+            prevBtn.disabled = currentPage === 0;
+            nextBtn.disabled = currentPage === pages.length - 1;
+        }
+
+        // Show progress modal
+        function showProgressModal() {
+            const modal = document.getElementById('progress-modal');
+            const progressPercent = Math.round(((currentPage + 1) / pages.length) * 100);
+            const progressBar = document.getElementById('progress-bar');
+            const progressPercentSpan = document.getElementById('progress-percent');
+            const xpEarned = document.getElementById('xp-earned');
+            
+            // Update progress
+            progressPercentSpan.textContent = progressPercent;
+            progressBar.style.width = progressPercent + '%';
+            
+            // Update XP
+            totalXP += xpPerPage;
+            xpEarned.textContent = '+' + xpPerPage + ' XP';
+            
+            // Show modal with animation
+            modal.classList.add('active');
+        }
+
+        // Hide progress modal
+        function hideProgressModal() {
+            const modal = document.getElementById('progress-modal');
+            modal.classList.remove('active');
+        }
+
+        // Next button click handler
+        document.getElementById('next-btn').addEventListener('click', () => {
+            if (currentPage < pages.length - 1) {
+                // Show progress modal first
+                showProgressModal();
+            }
+        });
+
+        // Previous button click handler
+        document.getElementById('prev-btn').addEventListener('click', () => {
+            if (currentPage > 0) {
+                currentPage--;
+                loadPage(currentPage);
+                updateNavigationButtons();
+            }
+        });
+
+        // Modal close button
+        document.getElementById('close-modal').addEventListener('click', () => {
+            hideProgressModal();
+            currentPage++;
+            loadPage(currentPage);
+            updateNavigationButtons();
+        });
+
+        // Modal "Go Next" button
+        document.getElementById('modal-next-btn').addEventListener('click', () => {
+            hideProgressModal();
+            currentPage++;
+            loadPage(currentPage);
+            updateNavigationButtons();
+        });
+
+        // Close modal when clicking outside
+        document.getElementById('progress-modal').addEventListener('click', (e) => {
+            if (e.target.id === 'progress-modal') {
+                hideProgressModal();
+                currentPage++;
+                loadPage(currentPage);
+                updateNavigationButtons();
+            }
+        });
+
+        // Try it Yourself button (placeholder functionality)
+        document.addEventListener('click', (e) => {
+            if (e.target.classList.contains('try-button')) {
+                alert('This would open an interactive code editor! 🚀');
+            }
+            
+            // Sidebar navigation - click on sidebar items to jump to pages
+            if (e.target.classList.contains('sidebar-item') && e.target.hasAttribute('data-page')) {
+                const pageIndex = parseInt(e.target.getAttribute('data-page'));
+                currentPage = pageIndex;
+                loadPage(currentPage);
+                updateNavigationButtons();
+            }
+        });
+
+        // Initialize on page load
+        init();
+    </script>
 </body>
 </html>
