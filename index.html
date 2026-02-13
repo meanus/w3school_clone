@@ -155,6 +155,44 @@
             color: var(--primary-green);
         }
 
+        /* Advertisement Bar Styles */
+        .ad-container {
+            width: 100%;
+            max-width: 1000px;
+            margin: 30px auto;
+            position: relative;
+            overflow: hidden;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .ad-slide {
+            width: 100%;
+            height: auto;
+            display: none;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        .ad-slide.active {
+            display: block;
+        }
+
+        .ad-slide img {
+            width: 100%;
+            height: auto;
+            display: block;
+            border-radius: 8px;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
         /* Main Container */
         .container {
             display: flex;
@@ -232,83 +270,96 @@
         }
 
         .content p {
+            margin-bottom: 18px;
+            color: var(--text-gray);
             font-size: 16px;
             line-height: 1.8;
-            margin-bottom: 18px;
-            color: #e0e0e0;
         }
 
-        .content ul {
-            margin-left: 25px;
-            margin-bottom: 20px;
+        .content ul, .content ol {
+            margin-bottom: 18px;
+            padding-left: 30px;
         }
 
         .content li {
-            font-size: 16px;
-            line-height: 1.8;
             margin-bottom: 10px;
-            color: #e0e0e0;
+            color: var(--text-gray);
+            line-height: 1.8;
         }
 
-        /* Code Block */
+        /* Code Blocks */
         .code-block {
             background-color: var(--code-bg);
+            border-left: 4px solid var(--primary-green);
+            border-radius: 5px;
+            padding: 20px;
+            margin: 25px 0;
+            overflow-x: auto;
+        }
+
+        .code-block code {
+            font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+            font-size: 14px;
+            line-height: 1.6;
+            color: #f8f8f2;
+            display: block;
+            white-space: pre;
+        }
+
+        /* Syntax Highlighting */
+        .keyword { color: #ff79c6; }
+        .string { color: #50fa7b; }
+        .comment { color: #6272a4; }
+        .function { color: #8be9fd; }
+        .number { color: #bd93f9; }
+
+        /* Note Boxes */
+        .note-box {
+            background-color: rgba(4, 170, 109, 0.1);
             border-left: 4px solid var(--primary-green);
             padding: 20px;
             margin: 25px 0;
             border-radius: 5px;
-            overflow-x: auto;
-            font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
         }
 
-        .code-block code {
-            color: #ffffff;
-            font-size: 14px;
-            line-height: 1.6;
+        .note-box strong {
+            color: var(--primary-green);
         }
 
-        .keyword {
-            color: #569CD6;
+        .warning-box {
+            background-color: rgba(255, 193, 7, 0.1);
+            border-left: 4px solid #ffc107;
+            padding: 20px;
+            margin: 25px 0;
+            border-radius: 5px;
         }
 
-        .string {
-            color: #CE9178;
+        .warning-box strong {
+            color: #ffc107;
         }
 
-        .comment {
-            color: #6A9955;
-            font-style: italic;
-        }
-
-        .function {
-            color: #DCDCAA;
-        }
-
-        /* Try it Yourself Button */
+        /* Buttons */
         .try-button {
             background-color: var(--primary-green);
             color: white;
             border: none;
-            padding: 12px 25px;
-            font-size: 15px;
-            font-weight: 600;
+            padding: 14px 32px;
+            font-size: 16px;
             border-radius: 5px;
             cursor: pointer;
-            margin: 20px 0;
             transition: all 0.3s;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
+            font-weight: 600;
+            margin: 25px 0;
         }
 
         .try-button:hover {
-            background-color: #038f5d;
+            background-color: #059862;
             transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(4, 170, 109, 0.3);
+            box-shadow: 0 4px 8px rgba(4, 170, 109, 0.3);
         }
 
         /* Navigation Buttons */
-        .page-nav {
+        .nav-buttons {
             display: flex;
             justify-content: space-between;
             margin-top: 50px;
@@ -320,42 +371,27 @@
             background-color: var(--primary-green);
             color: white;
             border: none;
-            padding: 14px 30px;
-            font-size: 15px;
-            font-weight: 600;
+            padding: 14px 32px;
+            font-size: 16px;
             border-radius: 5px;
             cursor: pointer;
             transition: all 0.3s;
+            font-weight: 600;
             display: flex;
             align-items: center;
             gap: 10px;
         }
 
         .nav-button:hover:not(:disabled) {
-            background-color: #038f5d;
+            background-color: #059862;
             transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(4, 170, 109, 0.3);
+            box-shadow: 0 4px 8px rgba(4, 170, 109, 0.3);
         }
 
         .nav-button:disabled {
-            background-color: #555;
+            background-color: var(--border-color);
             cursor: not-allowed;
             opacity: 0.5;
-        }
-
-        /* Bookmark Icon */
-        .bookmark {
-            position: absolute;
-            top: 40px;
-            right: 60px;
-            color: var(--text-gray);
-            font-size: 24px;
-            cursor: pointer;
-            transition: color 0.3s;
-        }
-
-        .bookmark:hover {
-            color: var(--primary-green);
         }
 
         /* Progress Modal */
@@ -366,260 +402,173 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(0, 0, 0, 0.7);
+            background-color: rgba(0, 0, 0, 0.8);
             z-index: 2000;
-            align-items: center;
             justify-content: center;
+            align-items: center;
         }
 
         .modal-overlay.active {
             display: flex;
         }
 
-        .modal {
-            background-color: white;
-            border-radius: 10px;
+        .modal-content {
+            background-color: var(--dark-bg);
+            padding: 40px;
+            border-radius: 12px;
+            max-width: 500px;
             width: 90%;
-            max-width: 650px;
-            padding: 0;
+            text-align: center;
             position: relative;
             animation: modalSlideIn 0.3s ease-out;
         }
 
         @keyframes modalSlideIn {
             from {
+                transform: translateY(-50px);
                 opacity: 0;
-                transform: translateY(-30px);
             }
             to {
-                opacity: 1;
                 transform: translateY(0);
+                opacity: 1;
             }
-        }
-
-        .modal-header {
-            padding: 25px 30px;
-            border-bottom: 1px solid #e0e0e0;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .modal-header-text {
-            color: #666;
-            font-size: 13px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
         }
 
         .modal-close {
+            position: absolute;
+            top: 15px;
+            right: 15px;
             background: none;
             border: none;
+            color: var(--text-gray);
             font-size: 24px;
-            color: #666;
             cursor: pointer;
-            padding: 0;
-            width: 30px;
-            height: 30px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
             transition: color 0.3s;
         }
 
         .modal-close:hover {
-            color: #000;
+            color: var(--text-light);
         }
 
-        .modal-body {
-            padding: 30px;
-        }
-
-        .modal-content-wrapper {
-            display: flex;
-            gap: 30px;
-        }
-
-        .modal-left {
-            flex: 1;
-        }
-
-        .modal-title {
-            font-size: 32px;
-            color: #000;
-            margin-bottom: 15px;
-            font-weight: 700;
-        }
-
-        .modal-subtitle {
-            font-size: 16px;
-            color: #333;
-            margin-bottom: 25px;
-        }
-
-        .modal-subtitle strong {
-            font-weight: 600;
-        }
-
-        .xp-display {
-            display: flex;
-            align-items: center;
-            gap: 15px;
+        .achievement-icon {
+            font-size: 64px;
             margin-bottom: 20px;
         }
 
-        .xp-badge {
-            background-color: #4285F4;
-            color: white;
-            padding: 8px 20px;
-            border-radius: 25px;
-            font-weight: 700;
-            font-size: 14px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .xp-number {
-            font-size: 16px;
-        }
-
-        .fox-icon {
-            width: 50px;
-            height: 50px;
-            background: linear-gradient(135deg, #FF9A56, #FF6B35);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 24px;
-        }
-
-        .progress-section {
-            margin-top: 25px;
-        }
-
-        .progress-title {
-            font-size: 14px;
-            color: #666;
-            margin-bottom: 10px;
-        }
-
-        .progress-percentage {
-            font-size: 18px;
-            color: #000;
-            font-weight: 600;
-            margin-bottom: 8px;
+        .modal-content h2 {
+            color: var(--text-light);
+            margin-bottom: 15px;
+            font-size: 28px;
         }
 
         .progress-bar-container {
-            width: 100%;
-            height: 8px;
-            background-color: #e0e0e0;
-            border-radius: 10px;
+            background-color: var(--border-color);
+            height: 12px;
+            border-radius: 6px;
             overflow: hidden;
+            margin: 25px 0;
         }
 
         .progress-bar {
+            background: linear-gradient(90deg, var(--primary-green), #02855a);
             height: 100%;
-            background-color: var(--primary-green);
-            border-radius: 10px;
+            border-radius: 6px;
             transition: width 0.5s ease;
         }
 
-        .modal-right {
-            width: 280px;
-            background-color: var(--primary-green);
-            border-radius: 8px;
-            padding: 35px 25px;
-            text-align: center;
+        .xp-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--primary-green), #02855a);
             color: white;
-        }
-
-        .cert-logo {
-            width: 60px;
-            height: 60px;
-            background: white;
-            border-radius: 50%;
-            margin: 0 auto 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            padding: 10px 20px;
+            border-radius: 20px;
+            font-size: 18px;
             font-weight: bold;
-            font-size: 24px;
-            color: var(--primary-green);
-        }
-
-        .cert-title {
-            font-size: 20px;
-            font-weight: 700;
-            margin-bottom: 10px;
-            line-height: 1.3;
-        }
-
-        .cert-price {
-            font-size: 32px;
-            font-weight: 700;
             margin: 15px 0;
         }
 
-        .cert-discount {
-            font-size: 14px;
+        .modal-next-btn {
+            background-color: var(--primary-green);
+            color: white;
+            border: none;
+            padding: 14px 32px;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 600;
+            margin-top: 20px;
+        }
+
+        .modal-next-btn:hover {
+            background-color: #059862;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(4, 170, 109, 0.3);
+        }
+
+        /* Right Sidebar */
+        .right-sidebar {
+            width: 300px;
+            padding: 20px;
+            background-color: var(--sidebar-bg);
+            border-left: 1px solid var(--border-color);
+        }
+
+        .ad-widget {
+            background-color: var(--dark-bg);
+            border-radius: 8px;
+            padding: 20px;
             margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .ad-widget h3 {
+            color: var(--text-light);
+            margin-bottom: 15px;
+            font-size: 18px;
+        }
+
+        .certification-badge {
+            background: linear-gradient(135deg, var(--primary-green), #02855a);
+            color: white;
+            padding: 30px 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        .certification-badge h3 {
+            font-size: 20px;
+            margin-bottom: 10px;
+        }
+
+        .certification-badge .price {
+            font-size: 32px;
+            font-weight: bold;
+            color: white;
+            margin: 10px 0;
+        }
+
+        .certification-badge .old-price {
+            text-decoration: line-through;
+            font-size: 16px;
+            opacity: 0.7;
         }
 
         .learn-more-btn {
             background-color: white;
             color: var(--primary-green);
             border: none;
-            padding: 10px 25px;
-            font-size: 14px;
-            font-weight: 600;
+            padding: 12px 24px;
             border-radius: 5px;
             cursor: pointer;
+            font-weight: 600;
+            margin-top: 15px;
             transition: all 0.3s;
         }
 
         .learn-more-btn:hover {
-            background-color: #f0f0f0;
-        }
-
-        .remove-ads {
-            margin-top: 20px;
-            color: white;
-            font-size: 13px;
-            text-decoration: none;
-            display: block;
-            transition: opacity 0.3s;
-        }
-
-        .remove-ads:hover {
-            opacity: 0.8;
-        }
-
-        .modal-footer {
-            padding: 0 30px 30px 30px;
-        }
-
-        .go-next-btn {
-            width: 100%;
-            background-color: var(--primary-green);
-            color: white;
-            border: none;
-            padding: 15px;
-            font-size: 16px;
-            font-weight: 600;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: all 0.3s;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-        }
-
-        .go-next-btn:hover {
-            background-color: #038f5d;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         }
 
         /* Scrollbar Styling */
@@ -637,25 +586,27 @@
         }
 
         ::-webkit-scrollbar-thumb:hover {
-            background: #555;
+            background: var(--primary-green);
         }
 
-        /* Responsive */
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .right-sidebar {
+                display: none;
+            }
+        }
+
         @media (max-width: 768px) {
             .sidebar {
                 display: none;
             }
-
+            
             .content {
                 padding: 20px;
             }
-
-            .modal-content-wrapper {
-                flex-direction: column;
-            }
-
-            .modal-right {
-                width: 100%;
+            
+            .header-nav {
+                display: none;
             }
         }
     </style>
@@ -664,207 +615,207 @@
     <!-- Header -->
     <header>
         <div class="logo">
-            <div class="logo-icon">W<sup>3</sup></div>
+            <div class="logo-icon">W3</div>
             <span class="logo-text">schools</span>
         </div>
+        
         <div class="header-nav">
-            <a href="#" class="nav-link">Tutorials</a>
-            <a href="#" class="nav-link">References</a>
-            <a href="#" class="nav-link">Exercises</a>
-            <a href="#" class="nav-link">Certificates</a>
+            <a href="#" class="nav-link">Tutorials ▼</a>
+            <a href="#" class="nav-link">References ▼</a>
+            <a href="#" class="nav-link">Exercises ▼</a>
+            <a href="#" class="nav-link">Certificates ▼</a>
         </div>
+        
         <div class="search-box">
-            <i class="fas fa-search" style="color: var(--text-gray);"></i>
+            <i class="fas fa-search"></i>
             <input type="text" placeholder="Search...">
         </div>
+        
         <div class="header-icons">
-            <i class="fas fa-bars"></i>
-            <i class="far fa-moon"></i>
-            <i class="far fa-user"></i>
+            <i class="fas fa-ellipsis-v"></i>
+            <i class="fas fa-user"></i>
         </div>
     </header>
 
     <!-- Top Navigation -->
     <nav class="top-nav">
         <div class="top-nav-items">
-            <a href="#" class="top-nav-item">MYSQL</a>
-            <a href="#" class="top-nav-item">JQUERY</a>
-            <a href="#" class="top-nav-item">EXCEL</a>
-            <a href="#" class="top-nav-item">XML</a>
-            <a href="#" class="top-nav-item">DJANGO</a>
-            <a href="#" class="top-nav-item">NUMPY</a>
-            <a href="#" class="top-nav-item">PANDAS</a>
-            <a href="#" class="top-nav-item">NODEJS</a>
-            <a href="#" class="top-nav-item">DSA</a>
-            <a href="#" class="top-nav-item">TYPESCRIPT</a>
-            <a href="#" class="top-nav-item">ANGULAR</a>
-            <a href="#" class="top-nav-item">ANGULARJS</a>
-            <a href="#" class="top-nav-item">GIT</a>
-            <a href="#" class="top-nav-item">POSTGRESQL</a>
-            <a href="#" class="top-nav-item">MONGODB</a>
-            <a href="#" class="top-nav-item">ASP</a>
+            <a href="#" class="top-nav-item">HTML</a>
+            <a href="#" class="top-nav-item">CSS</a>
+            <a href="#" class="top-nav-item">JAVASCRIPT</a>
+            <a href="#" class="top-nav-item">SQL</a>
+            <a href="#" class="top-nav-item">PYTHON</a>
+            <a href="#" class="top-nav-item">JAVA</a>
+            <a href="#" class="top-nav-item">PHP</a>
+            <a href="#" class="top-nav-item">C++</a>
+            <a href="#" class="top-nav-item">REACT</a>
+            <a href="#" class="top-nav-item">NODE.JS</a>
             <a href="#" class="top-nav-item active">AI</a>
+            <a href="#" class="top-nav-item">MORE ▼</a>
         </div>
     </nav>
 
     <!-- Main Container -->
     <div class="container">
-        <!-- Sidebar -->
+        <!-- Left Sidebar -->
         <aside class="sidebar">
             <div class="sidebar-section">
-                <div class="sidebar-title">ML Training</div>
-                <div class="sidebar-item">ML Testing</div>
-                <div class="sidebar-item">ML Learning</div>
-                <div class="sidebar-item">ML Terminology</div>
-                <div class="sidebar-item">ML Data</div>
-                <div class="sidebar-item">ML Clustering</div>
-                <div class="sidebar-item">ML Regressions</div>
-                <div class="sidebar-item">ML Deep Learning</div>
-                <div class="sidebar-item">ML Brain.js</div>
-            </div>
-            <div class="sidebar-section">
                 <div class="sidebar-title">CNN Tutorial</div>
-                <div class="sidebar-item" data-page="0">Introduction to CNNs</div>
-                <div class="sidebar-item" data-page="1">Convolutional Layers</div>
-                <div class="sidebar-item" data-page="2">Pooling Layers</div>
-                <div class="sidebar-item" data-page="3">Activation Functions</div>
-                <div class="sidebar-item" data-page="4">Building Complete CNN</div>
+                <div class="sidebar-item active" data-page="0">CNN Introduction</div>
+                <div class="sidebar-item" data-page="1">CNN Architecture</div>
+                <div class="sidebar-item" data-page="2">Convolutional Layers</div>
+                <div class="sidebar-item" data-page="3">Pooling Layers</div>
+                <div class="sidebar-item" data-page="4">Activation Functions</div>
+                <div class="sidebar-item" data-page="5">Building a CNN</div>
             </div>
+            
             <div class="sidebar-section">
-                <div class="sidebar-title">TensorFlow</div>
-                <div class="sidebar-item">TFJS Tutorial</div>
-                <div class="sidebar-item">TFJS Operations</div>
-                <div class="sidebar-item">TFJS Models</div>
-                <div class="sidebar-item">TFJS Visor</div>
-            </div>
-            <div class="sidebar-section">
-                <div class="sidebar-title">Example 1</div>
-                <div class="sidebar-item">Ex1 Intro</div>
-                <div class="sidebar-item">Ex1 Data</div>
-                <div class="sidebar-item">Ex1 Model</div>
-                <div class="sidebar-item">Ex1 Training</div>
+                <div class="sidebar-title">Advanced Topics</div>
+                <div class="sidebar-item" data-page="6">Transfer Learning</div>
+                <div class="sidebar-item" data-page="7">Data Augmentation</div>
+                <div class="sidebar-item" data-page="8">Hyperparameter Tuning</div>
             </div>
         </aside>
 
-        <!-- Content Area -->
+        <!-- Main Content -->
         <main class="content">
-            <i class="far fa-bookmark bookmark"></i>
+            <!-- Advertisement Container -->
+            <div class="ad-container">
+                <div class="ad-slide active">
+                    <img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fcampus.w3schools.com%2Fcdn%2Fshop%2Ffiles%2F186_1200x1200.png%3Fv%3D1720962217&f=1&nofb=1&ipt=26233a0c201d5e559a8b09723e2418e10b83338d631018bc7ac98ba25baf883b" alt="Advertisement 1">
+                </div>
+                <div class="ad-slide">
+                    <img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.classcentral.com%2Freport%2Fwp-content%2Fuploads%2F2022%2F04%2FDeep-Learning-BCG-Featured-image.png&f=1&nofb=1&ipt=ce43a40393beb85c649eec3cdefff01458c75a5fa8e1bff45ddd280bcc8f7fa6" alt="Advertisement 2">
+                </div>
+            </div>
+
+            <!-- Page Content -->
             <div id="page-content">
-                <!-- Content will be loaded here by JavaScript -->
+                <!-- Content will be loaded dynamically here -->
             </div>
 
             <!-- Navigation Buttons -->
-            <div class="page-nav">
-                <button class="nav-button" id="prev-btn" disabled>
-                    <i class="fas fa-chevron-left"></i> Previous
+            <div class="nav-buttons">
+                <button class="nav-button" id="prev-btn">
+                    <i class="fas fa-chevron-left"></i>
+                    Previous
                 </button>
                 <button class="nav-button" id="next-btn">
-                    Next <i class="fas fa-chevron-right"></i>
+                    Next
+                    <i class="fas fa-chevron-right"></i>
                 </button>
             </div>
         </main>
+
+        <!-- Right Sidebar -->
+        <aside class="right-sidebar">
+            <div class="certification-badge">
+                <h3>Get Certified</h3>
+                <p>40+ certifications</p>
+                <p>One-time payment</p>
+                <div class="price">$499</div>
+                <div class="old-price">$1995</div>
+                <button class="learn-more-btn">Learn more</button>
+            </div>
+            
+            <div class="ad-widget">
+                <h3>COLOR PICKER</h3>
+                <div style="width: 100%; height: 150px; background: linear-gradient(to bottom, red, yellow, green, cyan, blue, magenta, red); border-radius: 50%; margin: 20px auto;"></div>
+            </div>
+        </aside>
     </div>
 
     <!-- Progress Modal -->
     <div class="modal-overlay" id="progress-modal">
-        <div class="modal">
-            <div class="modal-header">
-                <span class="modal-header-text">ACTIVITY COMPLETED</span>
-                <button class="modal-close" id="close-modal">×</button>
+        <div class="modal-content">
+            <button class="modal-close" id="close-modal">&times;</button>
+            <div class="achievement-icon">🎉</div>
+            <h2>Great Progress!</h2>
+            <p style="color: var(--text-gray);">You're <span id="progress-percent">0</span>% through the tutorial</p>
+            
+            <div class="progress-bar-container">
+                <div class="progress-bar" id="progress-bar" style="width: 0%"></div>
             </div>
-            <div class="modal-body">
-                <div class="modal-content-wrapper">
-                    <div class="modal-left">
-                        <h2 class="modal-title">Nice Work!</h2>
-                        <p class="modal-subtitle">You've finished <strong>Convolutional Neural Networks Tutorial</strong></p>
-                        
-                        <div class="xp-display">
-                            <div class="xp-badge">
-                                <span>XP</span>
-                                <span class="xp-number" id="xp-earned">+10 XP</span>
-                            </div>
-                            <div class="fox-icon">🦊</div>
-                        </div>
-
-                        <div class="progress-section">
-                            <div class="progress-title">AI Tutorial</div>
-                            <div class="progress-percentage"><span id="progress-percent">20</span>% complete</div>
-                            <div class="progress-bar-container">
-                                <div class="progress-bar" id="progress-bar" style="width: 20%;"></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="modal-right">
-                        <div class="cert-logo">W<sup>3</sup></div>
-                        <div class="cert-title">CERTIFICATES THAT GET YOU HIRED</div>
-                        <div class="cert-price">for $499</div>
-                        <div class="cert-discount">Save 75%</div>
-                        <button class="learn-more-btn">Learn more</button>
-                        <a href="#" class="remove-ads">REMOVE ADS</a>
-                    </div>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button class="go-next-btn" id="modal-next-btn">
-                    Go Next <i class="fas fa-chevron-right"></i>
-                </button>
-            </div>
+            
+            <div class="xp-badge" id="xp-earned">+10 XP</div>
+            
+            <button class="modal-next-btn" id="modal-next-btn">Continue Learning →</button>
         </div>
     </div>
 
     <script>
-        // CNN Tutorial Pages Content
+        // Advertisement rotation script
+        let currentAdIndex = 0;
+        const adSlides = document.querySelectorAll('.ad-slide');
+        const AD_INTERVAL = 5000; // 5 seconds
+
+        function rotateAds() {
+            // Remove active class from current ad
+            adSlides[currentAdIndex].classList.remove('active');
+            
+            // Move to next ad
+            currentAdIndex = (currentAdIndex + 1) % adSlides.length;
+            
+            // Add active class to new ad
+            adSlides[currentAdIndex].classList.add('active');
+        }
+
+        // Start ad rotation
+        setInterval(rotateAds, AD_INTERVAL);
+
+        // Page content data
         const pages = [
             {
-                id: 1,
                 title: "Introduction to CNNs",
                 content: `
-                    <h1>Convolutional Neural Networks (CNNs)</h1>
+                    <h1>Introduction to Convolutional Neural Networks</h1>
                     
-                    <p>Convolutional Neural Networks (CNNs) are a class of deep neural networks that are particularly effective for analyzing visual imagery. They are widely used in image recognition, object detection, and computer vision tasks.</p>
+                    <p>Welcome to the Convolutional Neural Networks (CNN) tutorial! In this comprehensive guide, you'll learn everything you need to know about CNNs, from basic concepts to advanced implementations.</p>
                     
-                    <h2>What is a CNN?</h2>
+                    <h2>What are Convolutional Neural Networks?</h2>
                     
-                    <p>A Convolutional Neural Network is a Deep Learning algorithm which can take in an input image, assign importance (learnable weights and biases) to various aspects/objects in the image, and be able to differentiate one from the other.</p>
+                    <p>Convolutional Neural Networks (CNNs) are a class of deep neural networks that are particularly effective for analyzing visual imagery. They use a mathematical operation called convolution in at least one of their layers.</p>
                     
-                    <p>The key advantage of CNNs over traditional neural networks is that they can automatically learn spatial hierarchies of features through backpropagation.</p>
-                    
-                    <h2>Key Components of CNNs</h2>
-                    
-                    <ul>
-                        <li><strong>Convolutional Layers:</strong> Apply filters to detect features like edges, textures, and patterns</li>
-                        <li><strong>Pooling Layers:</strong> Reduce spatial dimensions while retaining important information</li>
-                        <li><strong>Fully Connected Layers:</strong> Make final classifications based on extracted features</li>
-                        <li><strong>Activation Functions:</strong> Introduce non-linearity into the network (ReLU, Sigmoid, etc.)</li>
-                    </ul>
+                    <div class="note-box">
+                        <strong>Key Point:</strong> CNNs are designed to automatically and adaptively learn spatial hierarchies of features from input images.
+                    </div>
                     
                     <h2>Why Use CNNs?</h2>
                     
-                    <p>CNNs are particularly well-suited for image-related tasks because:</p>
-                    
                     <ul>
-                        <li>They preserve spatial relationships between pixels</li>
-                        <li>They require fewer parameters than fully connected networks</li>
-                        <li>They are translation invariant - can recognize patterns anywhere in the image</li>
-                        <li>They can learn hierarchical features automatically</li>
+                        <li><strong>Automatic Feature Learning:</strong> CNNs can automatically detect important features without human supervision</li>
+                        <li><strong>Parameter Sharing:</strong> The same filter is used across different positions of the input, reducing the number of parameters</li>
+                        <li><strong>Translation Invariance:</strong> CNNs can recognize patterns regardless of their position in the image</li>
+                        <li><strong>Hierarchical Learning:</strong> Early layers detect simple features, while deeper layers combine them into complex patterns</li>
                     </ul>
                     
+                    <h2>Common Applications</h2>
+                    
+                    <ol>
+                        <li>Image Classification</li>
+                        <li>Object Detection</li>
+                        <li>Face Recognition</li>
+                        <li>Medical Image Analysis</li>
+                        <li>Self-driving Cars</li>
+                        <li>Video Analysis</li>
+                    </ol>
+                    
                     <div class="code-block">
-                        <code><span class="comment">// Example: Basic CNN architecture in TensorFlow.js</span>
-<span class="keyword">const</span> model = tf.<span class="function">sequential</span>();
+                        <code><span class="comment">// Simple example of creating a CNN layer in TensorFlow.js</span>
+<span class="keyword">const</span> model = tf.sequential();
 
-<span class="comment">// Add convolutional layer</span>
 model.<span class="function">add</span>(tf.layers.<span class="function">conv2d</span>({
-    inputShape: [<span class="string">28</span>, <span class="string">28</span>, <span class="string">1</span>],
-    filters: <span class="string">32</span>,
-    kernelSize: <span class="string">3</span>,
-    activation: <span class="string">'relu'</span>
+    inputShape: [<span class="number">28</span>, <span class="number">28</span>, <span class="number">1</span>],
+    kernelSize: <span class="number">5</span>,
+    filters: <span class="number">8</span>,
+    strides: <span class="number">1</span>,
+    activation: <span class="string">'relu'</span>,
+    kernelInitializer: <span class="string">'varianceScaling'</span>
 }));
-
-<span class="comment">// Add pooling layer</span>
-model.<span class="function">add</span>(tf.layers.<span class="function">maxPooling2d</span>({poolSize: <span class="string">2</span>}));
                         </code>
                     </div>
+                    
+                    <p>In the next sections, we'll dive deeper into the architecture and components of CNNs!</p>
                     
                     <button class="try-button">
                         Try it Yourself »
@@ -872,67 +823,145 @@ model.<span class="function">add</span>(tf.layers.<span class="function">maxPool
                 `
             },
             {
-                id: 2,
+                title: "CNN Architecture",
+                content: `
+                    <h1>CNN Architecture</h1>
+                    
+                    <p>A typical Convolutional Neural Network consists of several types of layers working together to process and classify images.</p>
+                    
+                    <h2>Main Components</h2>
+                    
+                    <p>A standard CNN architecture includes the following layers:</p>
+                    
+                    <ol>
+                        <li><strong>Input Layer:</strong> Receives the raw image data</li>
+                        <li><strong>Convolutional Layers:</strong> Apply filters to extract features</li>
+                        <li><strong>Activation Functions:</strong> Introduce non-linearity (usually ReLU)</li>
+                        <li><strong>Pooling Layers:</strong> Reduce spatial dimensions</li>
+                        <li><strong>Fully Connected Layers:</strong> Perform final classification</li>
+                        <li><strong>Output Layer:</strong> Produces the final predictions</li>
+                    </ol>
+                    
+                    <div class="note-box">
+                        <strong>Architecture Pattern:</strong> A typical CNN follows this pattern:<br>
+                        INPUT → [CONV → RELU → POOL] × N → [FC → RELU] × M → OUTPUT
+                    </div>
+                    
+                    <h2>Layer Flow Example</h2>
+                    
+                    <div class="code-block">
+                        <code><span class="comment">// Building a complete CNN architecture</span>
+<span class="keyword">const</span> model = tf.sequential();
+
+<span class="comment">// Input: 28x28 grayscale image</span>
+model.<span class="function">add</span>(tf.layers.<span class="function">conv2d</span>({
+    inputShape: [<span class="number">28</span>, <span class="number">28</span>, <span class="number">1</span>],
+    filters: <span class="number">32</span>,
+    kernelSize: <span class="number">3</span>,
+    activation: <span class="string">'relu'</span>
+}));
+
+<span class="comment">// Pooling layer</span>
+model.<span class="function">add</span>(tf.layers.<span class="function">maxPooling2d</span>({
+    poolSize: [<span class="number">2</span>, <span class="number">2</span>]
+}));
+
+<span class="comment">// Another conv block</span>
+model.<span class="function">add</span>(tf.layers.<span class="function">conv2d</span>({
+    filters: <span class="number">64</span>,
+    kernelSize: <span class="number">3</span>,
+    activation: <span class="string">'relu'</span>
+}));
+
+model.<span class="function">add</span>(tf.layers.<span class="function">maxPooling2d</span>({
+    poolSize: [<span class="number">2</span>, <span class="number">2</span>]
+}));
+
+<span class="comment">// Flatten for dense layers</span>
+model.<span class="function">add</span>(tf.layers.<span class="function">flatten</span>());
+
+<span class="comment">// Fully connected layers</span>
+model.<span class="function">add</span>(tf.layers.<span class="function">dense</span>({
+    units: <span class="number">128</span>,
+    activation: <span class="string">'relu'</span>
+}));
+
+model.<span class="function">add</span>(tf.layers.<span class="function">dense</span>({
+    units: <span class="number">10</span>,
+    activation: <span class="string">'softmax'</span>
+}));
+                        </code>
+                    </div>
+                    
+                    <h2>Key Architectural Decisions</h2>
+                    
+                    <ul>
+                        <li><strong>Number of Layers:</strong> Deeper networks can learn more complex features but require more data</li>
+                        <li><strong>Filter Sizes:</strong> Smaller filters (3x3) are more common in modern architectures</li>
+                        <li><strong>Number of Filters:</strong> Typically increases in deeper layers (32 → 64 → 128)</li>
+                        <li><strong>Pooling Strategy:</strong> Max pooling is most common, stride 2 is standard</li>
+                    </ul>
+                    
+                    <button class="try-button">
+                        Try it Yourself »
+                    </button>
+                `
+            },
+            {
                 title: "Convolutional Layers",
                 content: `
                     <h1>Convolutional Layers</h1>
                     
-                    <p>The convolutional layer is the core building block of a CNN. It performs the heavy lifting of feature extraction by applying various filters (kernels) to the input image.</p>
+                    <p>Convolutional layers are the core building blocks of CNNs. They apply filters (also called kernels) to the input to detect features.</p>
                     
                     <h2>How Convolution Works</h2>
                     
-                    <p>Convolution is a mathematical operation that takes two inputs:</p>
+                    <p>A convolution operation involves:</p>
                     
-                    <ul>
-                        <li><strong>Input Image:</strong> A multi-dimensional array of pixel values</li>
-                        <li><strong>Filter/Kernel:</strong> A small matrix that slides over the input</li>
-                    </ul>
+                    <ol>
+                        <li>Sliding a small filter (e.g., 3×3) across the input image</li>
+                        <li>At each position, performing element-wise multiplication</li>
+                        <li>Summing up the results to produce a single output value</li>
+                        <li>Repeating this process across the entire image</li>
+                    </ol>
                     
-                    <p>The filter slides across the image (convolution operation), computing the dot product at each position. This produces a feature map that highlights specific patterns like edges or textures.</p>
+                    <div class="note-box">
+                        <strong>Important:</strong> Each filter learns to detect a specific feature, such as edges, corners, or textures.
+                    </div>
                     
                     <h2>Key Parameters</h2>
                     
                     <ul>
-                        <li><strong>Filter Size:</strong> Typically 3x3 or 5x5 matrices</li>
-                        <li><strong>Stride:</strong> How many pixels the filter moves at each step</li>
+                        <li><strong>Filter Size (Kernel Size):</strong> Typically 3×3 or 5×5</li>
+                        <li><strong>Number of Filters:</strong> How many different features to detect</li>
+                        <li><strong>Stride:</strong> How many pixels to move the filter each step</li>
                         <li><strong>Padding:</strong> Adding zeros around the input to control output size</li>
-                        <li><strong>Number of Filters:</strong> Multiple filters detect different features</li>
                     </ul>
                     
                     <div class="code-block">
-                        <code><span class="comment">// Creating a convolutional layer</span>
-tf.layers.<span class="function">conv2d</span>({
-    <span class="comment">// Input shape: [height, width, channels]</span>
-    inputShape: [<span class="string">224</span>, <span class="string">224</span>, <span class="string">3</span>],
-    
-    <span class="comment">// Number of filters to apply</span>
-    filters: <span class="string">64</span>,
-    
-    <span class="comment">// Size of each filter</span>
-    kernelSize: <span class="string">3</span>,
-    
-    <span class="comment">// Stride: how much to move the filter</span>
-    strides: <span class="string">1</span>,
-    
-    <span class="comment">// Padding to preserve dimensions</span>
-    padding: <span class="string">'same'</span>,
-    
-    <span class="comment">// Activation function</span>
-    activation: <span class="string">'relu'</span>
-});
+                        <code><span class="comment">// Creating a convolutional layer with different parameters</span>
+model.<span class="function">add</span>(tf.layers.<span class="function">conv2d</span>({
+    filters: <span class="number">32</span>,           <span class="comment">// Number of filters</span>
+    kernelSize: <span class="number">3</span>,         <span class="comment">// 3x3 filter</span>
+    strides: <span class="number">1</span>,            <span class="comment">// Move 1 pixel at a time</span>
+    padding: <span class="string">'same'</span>,       <span class="comment">// Keep same dimensions</span>
+    activation: <span class="string">'relu'</span>,    <span class="comment">// Activation function</span>
+    inputShape: [<span class="number">28</span>, <span class="number">28</span>, <span class="number">1</span>]
+}));
                         </code>
                     </div>
                     
-                    <h2>Feature Maps</h2>
+                    <h2>Output Size Calculation</h2>
                     
-                    <p>Each filter produces a feature map that highlights where specific features are detected in the input. Multiple filters can detect different features like:</p>
+                    <p>The output size of a convolutional layer can be calculated using:</p>
                     
-                    <ul>
-                        <li>Horizontal and vertical edges</li>
-                        <li>Corners and curves</li>
-                        <li>Textures and patterns</li>
-                        <li>More complex shapes in deeper layers</li>
-                    </ul>
+                    <div class="code-block">
+                        <code>Output Size = ((Input Size - Filter Size + 2 × Padding) / Stride) + 1</code>
+                    </div>
+                    
+                    <div class="warning-box">
+                        <strong>Note:</strong> Using padding='same' automatically adjusts padding to keep the output size equal to the input size (when stride=1).
+                    </div>
                     
                     <button class="try-button">
                         Try it Yourself »
@@ -940,40 +969,34 @@ tf.layers.<span class="function">conv2d</span>({
                 `
             },
             {
-                id: 3,
                 title: "Pooling Layers",
                 content: `
                     <h1>Pooling Layers</h1>
                     
-                    <p>Pooling layers reduce the spatial dimensions of the feature maps while retaining the most important information. This helps decrease computational complexity and control overfitting.</p>
+                    <p>Pooling layers reduce the spatial dimensions of the feature maps, making the network more computationally efficient and helping to prevent overfitting.</p>
                     
                     <h2>Types of Pooling</h2>
                     
-                    <p>There are two main types of pooling operations:</p>
-                    
-                    <ul>
-                        <li><strong>Max Pooling:</strong> Takes the maximum value from each region</li>
-                        <li><strong>Average Pooling:</strong> Takes the average value from each region</li>
-                    </ul>
-                    
-                    <h2>Max Pooling</h2>
-                    
-                    <p>Max pooling is the most commonly used pooling method. It slides a window over the feature map and outputs the maximum value in each region. This preserves the strongest activations.</p>
+                    <h3>1. Max Pooling</h3>
+                    <p>Takes the maximum value from each window. This is the most commonly used pooling method.</p>
                     
                     <div class="code-block">
-                        <code><span class="comment">// Max pooling example</span>
-<span class="keyword">const</span> poolingLayer = tf.layers.<span class="function">maxPooling2d</span>({
-    <span class="comment">// Size of pooling window</span>
-    poolSize: [<span class="string">2</span>, <span class="string">2</span>],
-    
-    <span class="comment">// Stride (usually same as pool size)</span>
-    strides: [<span class="string">2</span>, <span class="string">2</span>],
-    
-    <span class="comment">// Padding</span>
-    padding: <span class="string">'valid'</span>
-});
-
-<span class="comment">// This reduces a 28x28 feature map to 14x14</span>
+                        <code><span class="comment">// Max pooling with 2x2 window</span>
+model.<span class="function">add</span>(tf.layers.<span class="function">maxPooling2d</span>({
+    poolSize: [<span class="number">2</span>, <span class="number">2</span>],
+    strides: [<span class="number">2</span>, <span class="number">2</span>]
+}));
+                        </code>
+                    </div>
+                    
+                    <h3>2. Average Pooling</h3>
+                    <p>Takes the average value from each window.</p>
+                    
+                    <div class="code-block">
+                        <code><span class="comment">// Average pooling</span>
+model.<span class="function">add</span>(tf.layers.<span class="function">averagePooling2d</span>({
+    poolSize: [<span class="number">2</span>, <span class="number">2</span>]
+}));
                         </code>
                     </div>
                     
@@ -981,20 +1004,29 @@ tf.layers.<span class="function">conv2d</span>({
                     
                     <ul>
                         <li><strong>Dimensionality Reduction:</strong> Reduces the number of parameters and computation</li>
-                        <li><strong>Translation Invariance:</strong> Makes the network more robust to small shifts in input</li>
-                        <li><strong>Feature Selection:</strong> Keeps the most important features while discarding less relevant information</li>
-                        <li><strong>Overfitting Prevention:</strong> Acts as a form of regularization</li>
+                        <li><strong>Translation Invariance:</strong> Helps the network recognize features regardless of position</li>
+                        <li><strong>Prevents Overfitting:</strong> Acts as a form of regularization</li>
+                        <li><strong>Increases Receptive Field:</strong> Allows deeper layers to see larger portions of the input</li>
                     </ul>
                     
-                    <h2>Pooling Size Trade-offs</h2>
+                    <div class="note-box">
+                        <strong>Common Practice:</strong> Use 2×2 pooling windows with stride 2, which reduces each spatial dimension by half.
+                    </div>
                     
-                    <p>The choice of pooling size affects the network:</p>
+                    <h2>Pooling vs Strided Convolution</h2>
                     
-                    <ul>
-                        <li>Larger pooling windows (3x3, 4x4) reduce dimensions faster but may lose important details</li>
-                        <li>Smaller pooling windows (2x2) preserve more information but reduce dimensions more slowly</li>
-                        <li>2x2 with stride 2 is the most common configuration</li>
-                    </ul>
+                    <p>Modern architectures sometimes replace pooling layers with strided convolutions:</p>
+                    
+                    <div class="code-block">
+                        <code><span class="comment">// Strided convolution as alternative to pooling</span>
+model.<span class="function">add</span>(tf.layers.<span class="function">conv2d</span>({
+    filters: <span class="number">64</span>,
+    kernelSize: <span class="number">3</span>,
+    strides: <span class="number">2</span>,  <span class="comment">// Reduces spatial dimensions like pooling</span>
+    activation: <span class="string">'relu'</span>
+}));
+                        </code>
+                    </div>
                     
                     <button class="try-button">
                         Try it Yourself »
@@ -1002,75 +1034,80 @@ tf.layers.<span class="function">conv2d</span>({
                 `
             },
             {
-                id: 4,
                 title: "Activation Functions",
                 content: `
-                    <h1>Activation Functions in CNNs</h1>
+                    <h1>Activation Functions</h1>
                     
-                    <p>Activation functions introduce non-linearity into the neural network, allowing it to learn complex patterns. Without activation functions, a neural network would simply be a linear regression model.</p>
+                    <p>Activation functions introduce non-linearity into neural networks, enabling them to learn complex patterns.</p>
                     
-                    <h2>Common Activation Functions</h2>
+                    <h2>Common Activation Functions in CNNs</h2>
                     
-                    <h2>ReLU (Rectified Linear Unit)</h2>
-                    
-                    <p>ReLU is the most popular activation function for CNNs. It's simple yet effective:</p>
+                    <h3>1. ReLU (Rectified Linear Unit)</h3>
+                    <p>The most popular activation function for hidden layers in CNNs.</p>
                     
                     <div class="code-block">
-                        <code><span class="comment">// ReLU function: f(x) = max(0, x)</span>
-<span class="keyword">const</span> relu = <span class="function">(x)</span> => Math.<span class="function">max</span>(<span class="string">0</span>, x);
-
-<span class="comment">// In TensorFlow.js</span>
+                        <code><span class="comment">// ReLU: f(x) = max(0, x)</span>
 model.<span class="function">add</span>(tf.layers.<span class="function">conv2d</span>({
-    filters: <span class="string">32</span>,
-    kernelSize: <span class="string">3</span>,
-    activation: <span class="string">'relu'</span>  <span class="comment">// ReLU activation</span>
+    filters: <span class="number">32</span>,
+    kernelSize: <span class="number">3</span>,
+    activation: <span class="string">'relu'</span>
 }));
                         </code>
                     </div>
                     
-                    <p><strong>Advantages of ReLU:</strong></p>
+                    <p><strong>Advantages:</strong></p>
                     <ul>
-                        <li>Computationally efficient - simple max operation</li>
-                        <li>Helps prevent vanishing gradient problem</li>
-                        <li>Sparse activation - neurons either fire or don't</li>
-                        <li>Fast convergence during training</li>
+                        <li>Computationally efficient</li>
+                        <li>Helps avoid vanishing gradient problem</li>
+                        <li>Promotes sparse activation</li>
                     </ul>
                     
-                    <h2>Sigmoid</h2>
-                    
-                    <p>Sigmoid squashes values between 0 and 1, useful for binary classification:</p>
+                    <h3>2. Leaky ReLU</h3>
+                    <p>A variant that allows small negative values to pass through.</p>
                     
                     <div class="code-block">
-                        <code><span class="comment">// Sigmoid function: f(x) = 1 / (1 + e^(-x))</span>
-model.<span class="function">add</span>(tf.layers.<span class="function">dense</span>({
-    units: <span class="string">1</span>,
-    activation: <span class="string">'sigmoid'</span>  <span class="comment">// Often used in output layer</span>
+                        <code><span class="comment">// Leaky ReLU</span>
+model.<span class="function">add</span>(tf.layers.<span class="function">leakyReLU</span>({
+    alpha: <span class="number">0.01</span>  <span class="comment">// Small slope for negative values</span>
 }));
                         </code>
                     </div>
                     
-                    <h2>Softmax</h2>
-                    
-                    <p>Softmax is used for multi-class classification in the output layer:</p>
+                    <h3>3. Softmax</h3>
+                    <p>Used in the output layer for multi-class classification.</p>
                     
                     <div class="code-block">
-                        <code><span class="comment">// Softmax for multi-class classification</span>
+                        <code><span class="comment">// Softmax for output layer</span>
 model.<span class="function">add</span>(tf.layers.<span class="function">dense</span>({
-    units: <span class="string">10</span>,  <span class="comment">// 10 classes</span>
-    activation: <span class="string">'softmax'</span>  <span class="comment">// Outputs probabilities</span>
+    units: <span class="number">10</span>,
+    activation: <span class="string">'softmax'</span>  <span class="comment">// Outputs probabilities that sum to 1</span>
 }));
-
-<span class="comment">// Softmax converts logits to probabilities that sum to 1</span>
                         </code>
                     </div>
                     
-                    <h2>When to Use Each</h2>
+                    <h3>4. Sigmoid</h3>
+                    <p>Used for binary classification tasks.</p>
+                    
+                    <div class="code-block">
+                        <code><span class="comment">// Sigmoid for binary classification</span>
+model.<span class="function">add</span>(tf.layers.<span class="function">dense</span>({
+    units: <span class="number">1</span>,
+    activation: <span class="string">'sigmoid'</span>  <span class="comment">// Outputs value between 0 and 1</span>
+}));
+                        </code>
+                    </div>
+                    
+                    <div class="note-box">
+                        <strong>Best Practice:</strong> Use ReLU for hidden layers and softmax/sigmoid for the output layer depending on your task.
+                    </div>
+                    
+                    <h2>Choosing the Right Activation</h2>
                     
                     <ul>
-                        <li><strong>ReLU:</strong> Default choice for hidden layers in CNNs</li>
-                        <li><strong>Sigmoid:</strong> Binary classification output layers</li>
-                        <li><strong>Softmax:</strong> Multi-class classification output layers</li>
-                        <li><strong>Tanh:</strong> Sometimes used instead of ReLU, outputs between -1 and 1</li>
+                        <li><strong>Hidden Layers:</strong> ReLU or Leaky ReLU</li>
+                        <li><strong>Multi-class Output:</strong> Softmax</li>
+                        <li><strong>Binary Classification:</strong> Sigmoid</li>
+                        <li><strong>Regression:</strong> Linear (no activation)</li>
                     </ul>
                     
                     <button class="try-button">
@@ -1079,59 +1116,53 @@ model.<span class="function">add</span>(tf.layers.<span class="function">dense</
                 `
             },
             {
-                id: 5,
                 title: "Building a Complete CNN",
                 content: `
-                    <h1>Building a Complete CNN Model</h1>
+                    <h1>Building a Complete CNN</h1>
                     
-                    <p>Now let's put everything together and build a complete CNN model for image classification using TensorFlow.js.</p>
+                    <p>Let's put everything together and build a complete CNN for image classification using TensorFlow.js.</p>
                     
-                    <h2>Complete CNN Architecture</h2>
+                    <h2>Example: MNIST Digit Classification</h2>
                     
-                    <p>A typical CNN architecture includes:</p>
-                    
-                    <ul>
-                        <li>Input layer</li>
-                        <li>Multiple convolutional + pooling layer pairs</li>
-                        <li>Flatten layer to convert 2D to 1D</li>
-                        <li>Fully connected (dense) layers</li>
-                        <li>Output layer with appropriate activation</li>
-                    </ul>
+                    <p>We'll build a CNN to classify handwritten digits (0-9).</p>
                     
                     <div class="code-block">
-                        <code><span class="comment">// Complete CNN Model for MNIST digit classification</span>
-<span class="keyword">const</span> model = tf.<span class="function">sequential</span>();
+                        <code><span class="comment">// Import TensorFlow.js</span>
+<span class="keyword">import</span> * <span class="keyword">as</span> tf <span class="keyword">from</span> <span class="string">'@tensorflow/tfjs'</span>;
+
+<span class="comment">// Create the model</span>
+<span class="keyword">const</span> model = tf.sequential();
 
 <span class="comment">// First Convolutional Block</span>
 model.<span class="function">add</span>(tf.layers.<span class="function">conv2d</span>({
-    inputShape: [<span class="string">28</span>, <span class="string">28</span>, <span class="string">1</span>],
-    filters: <span class="string">32</span>,
-    kernelSize: <span class="string">3</span>,
+    inputShape: [<span class="number">28</span>, <span class="number">28</span>, <span class="number">1</span>],
+    filters: <span class="number">32</span>,
+    kernelSize: <span class="number">3</span>,
     activation: <span class="string">'relu'</span>
 }));
-model.<span class="function">add</span>(tf.layers.<span class="function">maxPooling2d</span>({poolSize: <span class="string">2</span>}));
+model.<span class="function">add</span>(tf.layers.<span class="function">maxPooling2d</span>({poolSize: <span class="number">2</span>}));
 
 <span class="comment">// Second Convolutional Block</span>
 model.<span class="function">add</span>(tf.layers.<span class="function">conv2d</span>({
-    filters: <span class="string">64</span>,
-    kernelSize: <span class="string">3</span>,
+    filters: <span class="number">64</span>,
+    kernelSize: <span class="number">3</span>,
     activation: <span class="string">'relu'</span>
 }));
-model.<span class="function">add</span>(tf.layers.<span class="function">maxPooling2d</span>({poolSize: <span class="string">2</span>}));
+model.<span class="function">add</span>(tf.layers.<span class="function">maxPooling2d</span>({poolSize: <span class="number">2</span>}));
 
 <span class="comment">// Flatten and Dense Layers</span>
 model.<span class="function">add</span>(tf.layers.<span class="function">flatten</span>());
 model.<span class="function">add</span>(tf.layers.<span class="function">dense</span>({
-    units: <span class="string">128</span>,
+    units: <span class="number">128</span>,
     activation: <span class="string">'relu'</span>
 }));
 
 <span class="comment">// Dropout for regularization</span>
-model.<span class="function">add</span>(tf.layers.<span class="function">dropout</span>({rate: <span class="string">0.5</span>}));
+model.<span class="function">add</span>(tf.layers.<span class="function">dropout</span>({rate: <span class="number">0.5</span>}));
 
 <span class="comment">// Output Layer</span>
 model.<span class="function">add</span>(tf.layers.<span class="function">dense</span>({
-    units: <span class="string">10</span>,
+    units: <span class="number">10</span>,
     activation: <span class="string">'softmax'</span>
 }));
 
@@ -1151,9 +1182,9 @@ model.<span class="function">compile</span>({
                     <div class="code-block">
                         <code><span class="comment">// Train the model</span>
 <span class="keyword">await</span> model.<span class="function">fit</span>(trainImages, trainLabels, {
-    epochs: <span class="string">10</span>,
-    batchSize: <span class="string">32</span>,
-    validationSplit: <span class="string">0.2</span>,
+    epochs: <span class="number">10</span>,
+    batchSize: <span class="number">32</span>,
+    validationSplit: <span class="number">0.2</span>,
     callbacks: {
         <span class="function">onEpochEnd:</span> <span class="keyword">async</span> (epoch, logs) => {
             console.<span class="function">log</span>(<span class="string">\`Epoch \${epoch + 1}: loss = \${logs.loss}\`</span>);
@@ -1170,7 +1201,7 @@ model.<span class="function">compile</span>({
 <span class="keyword">const</span> predictions = model.<span class="function">predict</span>(testImages);
 
 <span class="comment">// Get the predicted class</span>
-<span class="keyword">const</span> predictedClass = predictions.<span class="function">argMax</span>(-<span class="string">1</span>);
+<span class="keyword">const</span> predictedClass = predictions.<span class="function">argMax</span>(-<span class="number">1</span>);
                         </code>
                     </div>
                     
